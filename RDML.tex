@@ -64,13 +64,24 @@ At this point, there is a document designed to allow comparison the results of
 qPCR and HRM analysis performed on different instruments -- MIQE guidelines 
 \cite{bustin_miqe_2009, huggett_2013}. These guidelines suggest using the 
 Real-time PCR Data Markup Language (RDML) as the main interchange format for PCR 
-and HRM data. RDML data standard contains sufficient information to understand 
-the experimental setup, re-analyse the data and interpret the results 
-\cite{lefever_rdml:_2009}. But despite the presence of RDML format there is a 
-lack in the software capable of working with data in this format. Basically it 
-is programs from manufacturers of PCR devices or commercial programs such as 
-\textit{qbase+} \cite{rdml}. On the other hand, there are a number of open 
-source processing solutions for PCR and melting cuve analysis (e.g., HRM) 
+and HRM data. RDML promised to deliver a vendor independent and freely available 
+file format, which is based on Extensible Markup Language (XML). Storage and 
+exchange of qPCR data should be bidirectional. RDML data standard contains the 
+the raw data acquired by the machine, sufficient information to understand the 
+experimental setup (e.g., sample annotation, qPCR protocol, probe and primer 
+sequences) and re-analyse the data and interpret the results 
+\cite{lefever_rdml:_2009}. To the best of our knowledge is RDML  supported by 
+Bio-Rad (CFX96 and CFX384), Life Technologies (StepOne, ViiA7, QuantStudio) and 
+Roche (LC 2.0, LC96) thermo-cycler systems. Third party software (e.g., 
+primer3plus \cite{untergasser_2007}, QPCR \cite{pabinger_2009}, LinRegPCR 
+\cite{ruijter_2014}, \textit{qbase+} \cite{hellemans_2007}) are known to process 
+the RDML-format. However, there is no implementation for the \textbf{R} language 
+and environment for statistical computing and graphics. Thus, despite the 
+presence of the open RDML format there is a lack in the software software 
+capable of working with data in this format. Basically it is programs from 
+manufacturers of PCR devices or commercial programs such as \textit{qbase+} 
+\cite{rdml}. On the other hand, there are a number of open source processing 
+solutions for PCR and melting curve analysis (e.g., HRM) 
 \cite{roediger_RJ_2013,cousins_2012}, for example, implemented in \textbf{R} 
 packages \textit{qpcR}\cite{ritz_qpcr:_2008} and \textit{chipPCR} 
 \cite{roediger_chippcr_2014}.\\
@@ -88,11 +99,13 @@ may serve as foundation for other \textbf{R} package hosted at Bioconductor
 \cite{gentleman_2004} and CRAN \cite{RCT}.
 
 In this article we describe our \textbf{R} package \textit{RDML} which allows to 
-import qPCR data from RDML v1.1 format files and transform it to the human 
+import qPCR data from RDML~v1.1 format files and transform it to the human 
 readable format appropriate to the \textit{qpcR} and \textit{chipPCR} packages. 
 \textit{RDML} package is open-source, free to use, platform-independent, and 
 thus can be modified for specific tasks or other \textbf{R} packages, even 
-integrated to work-flows with other programming languages.
+integrated to work-flows with other programming languages. Even though many qPCR 
+instruments and software solutions are able work with the RDML format, there is 
+a need make RDML available for the ever increasing used \textbf{R} environment.
 
 \section{Implementation}
 
@@ -111,6 +124,10 @@ LightCycler 2.0, Roche LightCycler 96 and Applied Biosystems StepOne.
 
 Central functions of the \textit{RDML} package encompass the read-in of RDML 
 data files and summary functions for RDML objects.
+
+The RDML file format continues to develop coordinated by the RDML consortium 
+(www.rdml.org/). Currently the improved RDML~1.1 version is used. Version~1.2 is 
+currently being drafted. The \textit{RDML} package supports version~1.1.
 
 \begin{figure*}
 \begin{verbatim}
