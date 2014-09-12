@@ -1,4 +1,9 @@
 \documentclass{bioinfo}
+
+\usepackage{hyperref}
+\usepackage{tikz}  
+\usetikzlibrary{graphs}
+
 \copyrightyear{2014}
 \pubyear{2014}
 
@@ -128,6 +133,26 @@ data files and summary functions for RDML objects.
 The RDML file format continues to develop coordinated by the RDML consortium 
 (www.rdml.org/). Currently the improved RDML~1.1 version is used. Version~1.2 is 
 currently being drafted. The \textit{RDML} package supports version~1.1.
+
+Workflow of the \textit{RDML} can be divided into five main stages (see Figure~\ref{fig:RDMLworkflow}):
+\begin{itemize}
+	\item \textbf{Unzip file} -- RDML file is a zip archive that contains one or more XML data files. Process of unzipping performs by built-in \textbf{R} function \textit{unzip}. Unzipped temporary file(s) deletes after ending of the next stage;
+	\item \textbf{Parse inner XML tree} -- during this and next two stages we decided to use package \textit{XML} to parse XML tree and to get values from XML nodes;
+	\item \textbf{Get general information} -- getting from XML such information as run targets, sample types, dilution series;
+	\item \textbf{Get fluorescence data} -- forming from XML cycle/ fluorescence (for qPCR experiment) or temperature/ fluorescence (for melting experiment) tables and generating names by defined rules (see later explanations) for each sample at run;
+	\item \textbf{Combine into \textit{S3} class} -- combining of data obtained during previous stages into \textit{S3} class that represents \textit{list} of dilutions \textit{vector}, qPCR and/or melting data for samples in one table format or \textit{list} of tables spited by targets and samples types.
+\end{itemize}
+
+\begin{figure*}
+	\begin{tikzpicture}
+	\graph[nodes={align=center,rectangle,draw=black}, grow down sep=2em] {
+		Unzip file -> Parse inner XML tree -> Get general information ->
+		Get fluorescence data -> Combine into S3 class
+	};
+	\end{tikzpicture}
+	\caption[]{\textit{RDML} workflow representation.}
+	\label{fig:RDMLworkflow}
+\end{figure*}
 
 \begin{figure*}
 \begin{verbatim}
