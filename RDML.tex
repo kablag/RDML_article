@@ -96,14 +96,17 @@ packages \textit{qpcR}\cite{ritz_qpcr:_2008} and \textit{chipPCR}
 The availability of an standard is also a prerequisite to many disciplines and 
 can accelerate the advance in research. \textbf{R} has advanced internal 
 capabilities to record of details about a particular analysis to easily 
-recapitulate data from a study \cite{liu_2014}. Yet the exchange with other 
-systems was limited. An application of RDML is the distribution of data in an 
-unified format. Though there are other approaches available in \textbf{R} for 
-reproducible research \cite{Leeper_2014} we think is import to bridge the gab to 
-other qPCR as recently reviewed in \cite{pabinger_2014}. in the advance of 
-science \cite{gentleman_2004}. However, we argue that the \textit{RDML} package 
-may serve as foundation for other \textbf{R} package hosted at Bioconductor 
-\cite{gentleman_2004} and CRAN \cite{RCT}.
+recapitulate data from a study \cite{liu_2014}. The common approach for data 
+management in \textbf{R} and \textbf{R} graphical user interfaces are native 
+formats such as CSV, \textbf{R} workspaces as default data format or 
+\cite{rodiger_rkward_2012, pabinger_2014, RDCT2014c}. However, a direct exchange 
+with other systems was limited. An application of RDML is the distribution of 
+data in an unified format. Though there are other approaches available in 
+\textbf{R} for reproducible research \cite{Leeper_2014} we think is import to 
+bridge the gab to other qPCR as recently reviewed in \cite{pabinger_2014}. in 
+the advance of science \cite{gentleman_2004}. However, we argue that the 
+\textit{RDML} package may serve as foundation for other \textbf{R} package 
+hosted at Bioconductor \cite{gentleman_2004} and CRAN \cite{RCT}.
 
 In this article we describe our \textbf{R} package \textit{RDML} which allows to 
 import qPCR data from RDML~v1.1 format files and transform it to the human 
@@ -117,13 +120,14 @@ a need make RDML available for the ever increasing used \textbf{R} environment.
 \section{Implementation}
 
 The most recent stable \textit{RDML} package is available at CRAN 
-(\url{http://cran.r-project.org/web/packages/RDML/index.html}) along with a 
-documentation. The developmental version is hosted at GitHub 
-(\url{https://github.com/kablag/RDML}) with facilities to report bugs or request 
-features. \textit{RDML} is implemented in \textbf{R}’s \emph{S3} class system. 
-The naming convention in \textit{RDML} is \textit{lowerCamel} names 
-\cite{Baaaath_2012}. Others and we support the opinion that data sets are an 
-essential element of \textbf{R} packages for reproducible research 
+(\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
+developmental version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
+with facilities to report bugs or request features. All package development 
+followed the guidelines as descibed elsewhere \cite{RDCT2014a}. \textit{RDML} is 
+implemented in \textbf{R}’s \emph{S3} class system. The naming convention in 
+\textit{RDML} is \textit{lowerCamel} names \cite{Baaaath_2012}. Others and we 
+support the opinion that data sets are an essential element of \textbf{R} 
+packages for reproducible research 
 \cite{gentleman_2004,hofmann_2013,Leeper_2014}. Therefore, we included XYZ data 
 sets in the \textit{RDML} and the description of the experimental procedure. As 
 of \textit{RDML} v.~0.4-2 we provide data sets from the Bio-Rad CFX 96, Roche 
