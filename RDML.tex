@@ -4,6 +4,8 @@
 \usepackage{tikz}  
 \usetikzlibrary{graphs}
 
+\let\proglang=\textsf
+
 \copyrightyear{2014}
 \pubyear{2014}
 
@@ -140,15 +142,16 @@ The RDML file format continues to develop coordinated by the RDML consortium
 (www.rdml.org/). Currently the improved RDML~1.1 version is used. Version~1.2 is 
 currently being drafted. The \textit{RDML} package supports version~1.1.
 
-Workflow of the \textit{RDML} can be divided into five main stages (see Figure~\ref{fig:RDMLworkflow}):
+Workflow of the \textit{RDML} function can be divided into five main stages (see Figure~\ref{fig:RDMLworkflow}):
 \begin{itemize}
 	\item \textbf{Unzip file} -- RDML file is a zip archive that contains one or more XML data files. Process of unzipping performs by built-in \textbf{R} function \textit{unzip}. Unzipped temporary file(s) deletes after ending of the next stage;
 	\item \textbf{Parse inner XML tree} -- during this and next two stages we decided to use package \textit{XML} to parse XML tree and to get values from XML nodes;
 	\item \textbf{Get general information} -- getting from XML such information as run targets, sample types, dilution series;
-	\item \textbf{Get fluorescence data} -- forming from XML cycle/ fluorescence (for qPCR experiment) or temperature/ fluorescence (for melting experiment) tables and generating names by defined rules (see later explanations) for each sample at run;
+	\item \textbf{Get fluorescence data} -- forming from XML cycle/ fluorescence (for qPCR experiment) or temperature/ fluorescence (for melting experiment) tables and generating names by defined rules for each sample at run;
 	\item \textbf{Combine into \textit{S3} class} -- combining of data obtained during previous stages into \textit{S3} class that represents \textit{list} of dilutions \textit{vector}, qPCR and/or melting data for samples in one table format or \textit{list} of tables spited by targets and samples types.
 \end{itemize}
 
+The \textit{RDML} package contains 3 data sets from Bio-Rad CFX 96, Life Technologies StepOne and Roche LightCycler 96 PCR machines.
 \begin{figure*}
 	\begin{tikzpicture}
 	\graph[nodes={align=center,rectangle,draw=black}, grow down sep=2em] {
@@ -177,7 +180,11 @@ summary(lc96)
 \end{figure*}
 
 
-\section{Results and discussion}
+\section{Discussions and conclusions}
+
+We developed \textit{RDML} package for \textbf{R} designed to provide user friendly fluorescence data import from RDML v1.1 format files. This package can be used as a part of the qPCR or HRM data processing workflows or for experiments overview.
+
+\paragraph{Funding\textcolon}  Bio-Rad CFX 96 and Roche LightCycler 96 data sets were obtained at \textit{Center for collective use "Biotechnology"} of \textit{All-Russia Institute of Agricultural Biotechnology}.
 
 %\bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
