@@ -124,8 +124,7 @@ The most recent stable \textit{RDML} package is available at CRAN
 (\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
 developmental version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
 with facilities to report bugs or request features. All package development 
-followed the guidelines as descibed elsewhere \cite{RDCT2014a}. \textit{RDML} provides several emph{R6} classes, which corresponds to RDML~v1.2 format types. \emph{R} is language with dynamic typing -- this is helpful in small scripts but can lead to hard debugging errors in complicated workflows. \emph{R6} classes provide type-safe interfaces to set data without access to inner structure of objects thus all inputed data can be validated. This option is very useful when creating packages to work as intermediate level for other packages (e.g., such approach does not allow set emph{character} in place of emph{integer}). Another advantage of emph{R6} is inheritance -- \textit{RDML} package contain one base class with methods to print or generate XML from object. Others and we 
-support the opinion that data sets are an essential element of \textbf{R} 
+followed the guidelines as descibed elsewhere \cite{RDCT2014a}. \textit{RDML} provides several emph{R6} classes, which corresponds to RDML~v1.2 format types. \emph{R} is language with dynamic typing -- this is helpful in small scripts but can lead to hard debugging errors in complicated workflows. \emph{R6} classes provide type-safe interfaces to set data without access to inner structure of objects thus all inputed data can be validated. This option is very useful when creating packages to work as intermediate level for other packages (e.g., such approach does not allow set emph{character} in place of emph{integer} Supplementary Section "Modifying RDML objects"). Another advantage of emph{R6} is inheritance -- \textit{RDML} package contain one base class with methods to print or generate XML from object. Others and we support the opinion that data sets are an essential element of \textbf{R} 
 packages for reproducible research 
 \cite{gentleman_2004,hofmann_2013,Leeper_2014}. As 
 of \textit{RDML} v.~0.9-1 we provide data sets from the Bio-Rad CFX 96, Roche LightCycler 96 and Applied Biosystems StepOne.
@@ -134,27 +133,22 @@ Central functions of the \textit{RDML} package encompass the read-in of RDML
 data files, summary functions for RDML objects and getting fluorescence data.
 
 The RDML file format continues to develop coordinated by the RDML consortium 
-(www.rdml.org/). Currently RDML~1.2 version is used which is supproted by \textit{RDML} package.
+(www.rdml.org/). Currently RDML~1.2 version is used which is supported by \textit{RDML} package.
 
-Workflow of the creating new \textit{RDML} object from RDML file can be divided into five main stages (see Figure~\ref{fig:RDMLworkflow}):
+Manipulations with RDML data can be done by a major class called RDML through its public methods. 
+These methods include:
 \begin{itemize}
-	\item \textbf{Unzip file} -- RDML file is a zip archive that contains one or more XML data files. Process of unzipping performs by built-in \textbf{R} function \textit{unzip}. Unzipped temporary file(s) deletes after ending of the next stage;
-	\item \textbf{Parse inner XML tree} -- during this and next two stages we decided to use package \textit{XML} to parse XML tree and to get values from XML nodes;
-	\item \textbf{Get general information} -- getting from XML such information as run targets, sample types, dilution series;
-	\item \textbf{Get fluorescence data} -- forming from XML cycle/ fluorescence (for qPCR experiment) or temperature/ fluorescence (for melting experiment) tables for each curve at experiment;
-	\item \textbf{Combine into \textit{R6} class} -- combining of data obtained during previous stages into \textit{R6} class that contains fluorescence data and additional information in several subclasses.
+	\item \textbf{\$new()} -- creates new RDML object. Empty or from specified RDML file (Supplementary Section "Opening and observing RDML file");
+	\item \textbf{\$AsDendrogram()} -- represents structure of RDML object as dendrogram to observe it. (Supplementary Section "Opening and observing RDML file");	
+	\item \textbf{\$AsTable()} -- represents data contained in RDML object (except fluorescent data) as \textit{data.frame} (Supplementary Section "AsTable() method");
+	\item \textbf{\$GetFData()} -- gets fluorescent data (Supplementary Section "Getting fluorescence data");
+	\item \textbf{\$SetFData()} -- sets fluorescent data to RDML object (Supplementary Section "Setting fluorescence data");
+	\item \textbf{\$AsXML()} -- saves RDML object as RDML~v1.2 file (Supplementary Section "Saving RDML object as RDML file").
 \end{itemize}
 
-\begin{figure*}
-	\begin{tikzpicture}
-	\graph[nodes={align=center,rectangle,draw=black}, grow down sep=2em] {
-		Unzip file -> Parse inner XML tree -> Get general information ->
-		Get fluorescence data -> Combine into R6 class
-	};
-	\end{tikzpicture}
-	\caption[]{\textit{RDML} workflow representation.}
-	\label{fig:RDMLworkflow}
-\end{figure*}
+Beside working with existing RDML files our package allows to create files from your own data obtained with devices that do not support RDML format. To do this you need table with fluorescence data and minimal description of experiment (Supplementary Section "Creating RDML from table").
+
+Another advantage of our package is ability to merge several RDML files (experiments) into one with \textbf{MergeRDMLs} function and process them like unit (Supplementary Section "Merging RDML objects"). For example, you can combine results of two runs that have sample from one experiment or add calibration samples from one run to another.
 
 \section{Discussions and conclusions}
 
