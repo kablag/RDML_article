@@ -102,11 +102,10 @@
 	formats such as CSV, \textbf{R} workspaces as default data format or objects
 	\cite{rodiger_rkward_2012, pabinger_2014, RDCT2014c}. However, a direct exchange
 	with other systems was limited. An application of RDML is the distribution of
-	data in an unified format. Though there are other approaches available in
+	data in the unified format. Though there are other approaches available in
 	\textbf{R} for reproducible research \cite{Leeper_2014} we think is important to
-	bridge the gap to other qPCR as recently reviewed in \cite{pabinger_2014}. in
-	the advance of science \cite{gentleman_2004}. However, we argue that the
-	\textit{RDML} package may serve as foundation for other \textbf{R} package
+	bridge the gap to other qPCR as recently reviewed in \cite{pabinger_2014}. However, we 
+	argue that the \textit{RDML} package may serve as foundation for other \textbf{R} package
 	hosted at Bioconductor \cite{gentleman_2004} and CRAN \cite{RCT} as it was shown
 	recently \cite{rodiger2015r}.
 	
@@ -115,7 +114,7 @@
 	human readable format appropriate to the \textit{qpcR} and \textit{chipPCR}
 	packages. \textit{RDML} package is open-source, free to use,
 	platform-independent, and thus can be modified for specific tasks or other
-	\textbf{R} packages, even integrated to work-flows with other programming
+	\textbf{R} packages, or even integrated to work-flows with other programming
 	languages. Despite though many qPCR instruments and software solutions are able
 	work with the RDML format, there is a need make RDML available for the ever
 	increasing used \textbf{R} environment.
@@ -124,32 +123,29 @@
 	
 	The most recent stable \textit{RDML} package is available at CRAN
 	(\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the
-	developmental version is hosted at GitHub (\url{https://github.com/kablag/RDML})
+	development version is hosted at GitHub (\url{https://github.com/kablag/RDML})
 	with facilities to report bugs or request features. All package development
 	followed the guidelines as descibed elsewhere \cite{RDCT2014a}. \textit{RDML}
-	provides several emph{R6} classes, which corresponds to RDML~v1.2 format types.
-	\emph{R} is language with dynamic typing -- this is helpful in small scripts but
-	can lead to hard debugging errors in complicated workflows. \emph{R6} classes
+	provides several \textbf{R6} classes, which corresponds to RDML~v1.2 format types.
+	\textbf{R} is language with dynamic typing, which is helpful while scripting but
+	can lead to problematic debugging of more complicated workflows. \emph{R6} classes
 	provide type-safe interfaces to set data without access to inner structure of
 	objects thus all inputed data can be validated. This option is very useful when
 	creating packages to work as intermediate level for other packages (e.g., such
-	approach does not allow set emph{character} in place of emph{integer}
-	Supplementary Section S3). Another advantage of emph{R6} is inheritance --
-	\textit{RDML} package contain one base class with methods to print or generate
-	XML from object. Others and we support the opinion that data sets are an
-	essential element of \textbf{R} packages for reproducible research
-	\cite{gentleman_2004,hofmann_2013,Leeper_2014}. As of \textit{RDML} v.~0.9-1 we
-	provide data sets from the Bio-Rad CFX 96, Roche LightCycler 96 and Applied
-	Biosystems StepOne.
+	approach does not allow set \textbf{character} in place of \textbf{integer}
+	Supplementary Section S3). Furthermore, the inheritance of \textbf{R6} objects 
+	unifies the structure of the package and streamlines extending its capabilities 
+	(the whole package is written around a single base class).
+	
+	The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is still 
+	in development. The \textit{RDML} package follows the changes and supports the 
+	current version RDML~1.2. The future improvements of the RDML format will be also 
+	incorpotated into the package.
 	
 	Central functions of the \textit{RDML} package encompass the read-in of RDML
-	data files, summary functions for RDML objects and getting fluorescence data.
-	
-	The RDML file format continues to develop coordinated by the RDML consortium
-	(www.rdml.org/). Currently RDML~1.2 version is used which is supported by
-	\textit{RDML} package.
-	
-	Manipulations with the RDML data can be done by a major class called RDML
+	data file and summary functions for RDML objects. The capabilities of packages range 
+	from advanced statistical analysis to simple yet crucial extraction of the fluorescence 
+	data. Manipulations with the RDML data can be done by a major class called RDML
 	through
 	its public methods. These methods include: \begin{itemize} \item
 		\textbf{\$new()} -- creates new RDML object. Empty or from specified RDML file
@@ -162,23 +158,28 @@
 		(Supplementary Section S6); \item \textbf{\$AsXML()} -- saves RDML object as
 		RDML~v1.2 file (Supplementary Section S7). \end{itemize}
 	
-	Beside working with existing RDML files our package allows to create files from
-	your own data obtained with devices that do not support RDML format. To do this
-	you need table with fluorescence data and minimal description of experiment
+	Beside working with existing RDML files, the package can create new RDML objects from
+	the data obtained from systems that do not support RDML format. To create eligible RDML 
+	object, one has to provide fluorescence data and minimal description of experiment
 	(Supplementary Section S10).
 	
-	Another advantage of our package is ability to merge several RDML files
+	The unique advantage of our package is ability to merge several RDML files
 	(experiments) into one with \textbf{MergeRDMLs()} function and process them like
 	unit (Supplementary Section S7). For example, you can combine results of two
 	runs that have sample from one experiment or add calibration samples from one
 	run to another.
 	
+	We join the claim that data sets are an essential element of \textbf{R} packages 
+	for reproducible research \cite{gentleman_2004,hofmann_2013,Leeper_2014}. 
+	As of \textit{RDML} v.~0.9-1 we provide data sets from the Bio-Rad CFX 96, Roche 
+	LightCycler 96 and Applied Biosystems StepOne.
+	
 	\section{Discussions and conclusions}
 	
-	We developed \textit{RDML} package for \textbf{R} designed to provide
-	fluorescence data import from RDML~v1.1 and v1.2 format files, manipulate data
-	or create RDML~v1.2 files from user data. This package can be used as a part of
-	the qPCR or HRM data processing workflows or for experiments overview.
+	The \textit{RDML} package for \textbf{R} imports and manipulates data from RDML~v1.1 and 
+	v1.2 format files. It can also create RDML~v1.2 files from data provided by an user. 
+	This package can be used as a part of the qPCR or HRM data processing workflows or 
+	for experiments overview.
 	
 	\paragraph{Funding\textcolon}  Part of this work was funded by the Russian
 	Ministry of Education and Science (project No. RFMEFI62114X0003), with usage of
