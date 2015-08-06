@@ -68,7 +68,9 @@
 	formats prohibits processing the raw data from one instrument in the another 
 	system and adding the independent reference methods.
 	
-	De novo creation of data.
+	The \textit{de novo} creation of data is of importance for systems, which do 
+	not support the RDML format. This includes commercial systems and experimental 
+	systems (e.g.,  point-of-care devices).
 	
 	The Minimum information for publication of quantitative (digital) PCR 
 	experiments  were established to facilitate the comparison of experimental 
@@ -80,11 +82,10 @@
 	acquired by the machine, sufficient information to understand the experimental 
 	setup (e.g., sample annotation, qPCR protocol, probe and primer sequences) and 
 	re-analyse the data and interpret the results \cite{lefever_rdml_2009}. The RDML 
-	format is supported by Bio-Rad (CFX 96 and CFX 384), Life Technologies (StepOne, 
-	ViiA7, QuantStudio) and Roche (LightCycler 96) thermo-cycler systems. 
+	format is supported by Bio-Rad, Life Technologies and Roche (see Supplement). 
 	Third-party software (e.g., \textit{primer3plus} \cite{untergasser_2007}, \textit{QPCR}, 
 	\textit{LinRegPCR}, \textit{qbase+}) process the RDML format \cite{pabinger_2014, 
-	rdml-ninja_2015}. Despite the openness of the RDML format, there is open source 
+	rdml-ninja_2015}. Despite the openness of the RDML format, there is no open source 
 	software capable of reading and processing this data for statistical 
 	bioinformatics. Users have to choose between programs from manufacturers of PCR 
 	devices (which can use only their own generated files) or commercial software 
