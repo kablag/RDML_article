@@ -9,203 +9,210 @@
 
 \begin{document} \firstpage{1}
 	
-	\title[RDML]{RDML: an \textbf{R} Package for Working with RDML Format Data}
-	\author[Sample \textit{et~al}]{Corresponding Author\,$^{1,*}$, Co-Author\,$^{2}$
-		and Co-Author\,$^2$\footnote{to whom correspondence should be addressed}}
-	\address{$^{1}$Department of XXXXXXX, Address XXXX etc.\\ $^{2}$Department of
-		XXXXXXXX, Address XXXX etc.}
-	
-	\history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
-	
-	\editor{Associate Editor: XXXXXXX}
-	
-	\maketitle
-	
-	\begin{abstract}
-		
-		\section{Motivation:} Reproducible research is an essential 
-		element for good scientific conduct. Part of this is are open data exchange 
-		formats. The  Real-time PCR Data Markup Language
-		(RDML) file format is a recommended element of the Minimum 
-		Information for Publication of Quantitative Real-Time PCR Experiments (MIQE) 
-		guidelines. Preserving the set-up and output of experiments in well-defined 
-		scheme, RDML is a universal data storage systems. Despite the fact 
-		that software products of qPCR instruments export RDML data, 
-		there is no tools designed for manipulating RDML data in \textbf{R}, a 
-		\textit{lingua franca} of bioinformatics.
-		
-		\section{Results:} We developed the cross-platform open source 
-		\textit{RDML} package for the  \textbf{R} statistical computing language. 
-		\textit{RDML} is compliment to RDML~$\geq$~v.~1.1 and provides functionality to 
-		(i) import RDML data; (ii) to extracts sample information (e.g., targets, 
-		concentration); (iii) to transform data to various formats of the \textbf{R} 
-		environment; (iv) to generate human readable experiment summaries; and (v) to 
-		create RDML files from user data. In addition, offers \textit{RDML} a graphical 
-		user interface for selected functions. We show that \textit{RDML} enables a 
-		seamless analysis with with other \textbf{R} packages, such \textit{qpcR} and 
-		\textit{chipPCR}.
+\title[RDML]{RDML: an \textbf{R} Package for Working with RDML Format Data}
+\author[Sample \textit{et~al}]{Corresponding Author\,$^{1,*}$, Co-Author\,$^{2}$ 
+	and Co-Author\,$^2$\footnote{to whom correspondence should be addressed}}
 
-		\section{Availability:}
-		url{https://cran.r-project.org/web/packages/RDML}. Source code:
-		url{https://github.com/kablag/RDML}. \section{Contact:}
-		\href{k.blag@yandex.ru}{k.blag@yandex.ru} \end{abstract}
+\address{$^{1}$Department of XXXXXXX, Address XXXX etc.\\ $^{2}$Department of XXXXXXXX, Address XXXX etc.}
 	
-	\section{Introduction}
+\history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
+
+\editor{Associate Editor: XXXXXXX}
 	
-	Real-time quantitative PCR (qPCR) is one the most popular 
-	methods of the molecular biology, diagnostics, food industry and other areas. 
-	qPCR is well accepted since it is simple, accurate, reliable and reproducible 
-	\cite{pabinger_2014}. There are at least twenty real-time quantitative PCR 
-	cycler manufacturers. Such variety creates a broad selection to address the user 
-	specific needs. The systems differ in details such as the number of processable 
-	samples, the number of detection channels, the sample arrangement (e.g., plate, 
-	carousel). The devices use different data processing methods and incompatible 
-	data storage formats. This diversification comes at a cost at the level of data 
-	exchange. The binary data format means in most cases a vendor lock-in. 
-	Discrepancies in data processing hinder comparison of the PCR results obtained 
-	on different systems. Disparate storage formats prohibit the processing of raw 
-	data from one instrument in the another system. Data processing is a central 
-	challenge in qPCR data analysis \cite{roediger2015r, spiess_impact_2014}.
-	  
-	The \textit{de novo} creation of data is of importance for systems, which do 
-	not support the RDML format. This includes commercial systems and experimental 
-	systems (e.g.,  point-of-care devices).
-	
-	The Minimum information for publication of quantitative (digital) PCR 
-	experiments  were established to facilitate the comparison of experimental 
-	results from qPCR and digital PCR (dPCR) \cite{huggett_2013}. The guidelines 
-	suggest to use Real-time PCR Data Markup Language (RDML) as interchange data 
-	format \cite{rdml-ninja_2015}. RDML is a vendor independent and freely available 
-	file format, based on eXtensible Markup Language (XML). Storage and exchange of 
-	qPCR data are be bidirectional. RDML data standard contains the the raw data 
-	acquired by the machine, sufficient information to understand the experimental 
-	setup (e.g., sample annotation, qPCR protocol, probe and primer sequences) and 
-	re-analyse the data and interpret the results \cite{lefever_rdml_2009}. The RDML 
-	format is supported by Bio-Rad, Life Technologies and Roche (see Supplement). 
-	Third-party software (e.g., \textit{Primer3Plus} \cite{untergasser_2007}, \textit{QPCR}, 
-	\textit{LinRegPCR}, \textit{qBase+}) process the RDML format \cite{pabinger_2014, 
-	rdml-ninja_2015}. Despite the openness of the RDML format, there is no open source 
-	software capable of reading and processing this data for statistical 
-	bioinformatics. Users have to choose between programs from manufacturers of PCR 
-	devices (which can use only their own generated files) or commercial software 
-	such as \textit{qbase+} \cite{pabinger_2014, rdml-ninja_2015}. Recently, 
-	Ruijter~\textit{et~al.} published the open-source software \textit{RDML-Ninja}, 
-	which can visualize, edit and validate RDML files \cite{rdml-ninja_2015}. 
-	However, \textit{RDML-Ninja} cannot analyze the qPCR data by sophisticated 
-	analysis pipelines. 
-	
-	There is a number of open source processing solutions for qPCR, dPCR and melting curve 
-	analysis written in \textbf{R} \cite{pabinger_2014, ritz_qpcr_2008, roediger_RJ_2013, 
-	roediger2015chippcr}. Although the R environment extended by 
-	dedicated packages provides wide array of appropriate tools, it still cannot 
-	directly read RDML files. The \textit{RDML} package closes this gap and imports 
-	RDML data straight to \textbf{R} environment.
-	
+\maketitle
+
+\begin{abstract}
+		
+\section{Motivation:} Reproducible research is an essential 
+element for good scientific conduct. Part of this is are open data exchange 
+formats. The  Real-time PCR Data Markup Language (RDML) file format is a 
+recommended element of the Minimum Information for Publication of Quantitative 
+Real-Time PCR Experiments (MIQE) guidelines. Preserving the set-up and output of 
+experiments in well-defined scheme, RDML is a universal data storage systems. 
+Despite the fact that software products of qPCR instruments export RDML data, 
+there is no tools designed for manipulating RDML data in \textbf{R}, a 
+\textit{lingua franca} of bioinformatics.
+		
+\section{Results:} We developed the cross-platform open source \textit{RDML} 
+package for the  \textbf{R} statistical computing language. \textit{RDML} is 
+compliment to RDML~$\geq$~v.~1.1 and provides functionality to (i) import RDML 
+data; (ii) to extracts sample information (e.g., targets, concentration); (iii) 
+to transform data to various formats of the \textbf{R} environment; (iv) to 
+generate human readable experiment summaries; and (v) to create RDML files from 
+user data. In addition, offers \textit{RDML} a graphical user interface for 
+selected functions. We show that \textit{RDML} enables a seamless analysis with 
+with other \textbf{R} packages, such \textit{qpcR} and \textit{chipPCR}.
+
+\section{Availability:} url{https://cran.r-project.org/web/packages/RDML}. Source code: 
+url{https://github.com/kablag/RDML}. \section{Contact:} 
+\href{k.blag@yandex.ru}{k.blag@yandex.ru} \end{abstract}
+
+
+\section{Introduction}
+  Real-time quantitative PCR (qPCR) is one the most popular methods of the 
+molecular biology, diagnostics, food industry and other areas. qPCR is well 
+accepted since it is simple, accurate, reliable and reproducible 
+\cite{pabinger_2014}. There are at least twenty real-time quantitative PCR 
+cycler manufacturers. Such variety creates a broad selection to address the user 
+specific needs. The systems differ in details such as the number of processable 
+samples, the number of detection channels, the sample arrangement (e.g., plate, 
+carousel). The devices use different data processing methods and incompatible 
+data storage formats. This diversification comes at a cost at the level of data 
+exchange. The binary data format means in most cases a vendor lock-in. 
+Discrepancies in data processing hinder comparison of the PCR results obtained 
+on different systems. Disparate storage formats prohibit the processing of raw 
+data from one instrument in the another system. Data processing is a central 
+challenge in qPCR data analysis \cite{roediger2015r, spiess_impact_2014}.
+
+The \textit{de novo} creation of data is of importance for systems, 
+which do not support the RDML format. This includes commercial systems and 
+experimental systems (e.g.,  point-of-care devices). The Minimum information for 
+publication of quantitative (digital) PCR experiments  were established to 
+facilitate the comparison of experimental results from qPCR and digital PCR 
+(dPCR) \cite{huggett_2013}. The guidelines suggest to use Real-time PCR Data 
+Markup Language (RDML) as interchange data format \cite{rdml-ninja_2015}. RDML 
+is a vendor independent and freely available file format, based on eXtensible 
+Markup Language (XML) to pass meta data and value between applications. Storage 
+and exchange of qPCR data are be bidirectional. RDML data standard contains the 
+the primary raw data acquired by the machine, sufficient meta-information to understand the 
+experimental setup (e.g., sample annotation, qPCR protocol, probe and primer 
+sequences) and information to re-analyse the data and interpret the results 
+\cite{lefever_rdml_2009}. The RDML format is supported by Bio-Rad, Life 
+Technologies and Roche (see Supplement). Third-party software (e.g., 
+\textit{Primer3Plus} \cite{untergasser_2007}, \textit{QPCR}, \textit{LinRegPCR}, 
+\textit{qBase+}) process the RDML format \cite{pabinger_2014, rdml-ninja_2015}. 
+Despite the openness of the RDML format, there is no open source software 
+capable of reading and processing this data for statistical bioinformatics. 
+Users have to choose between programs from manufacturers of PCR devices (which 
+can use only their own generated files) or commercial software such as 
+\textit{qbase+} \cite{pabinger_2014, rdml-ninja_2015}. Recently, 
+Ruijter~\textit{et~al.} published the open-source software \textit{RDML-Ninja}, 
+which can visualize, edit and validate RDML files \cite{rdml-ninja_2015}. 
+However, \textit{RDML-Ninja} cannot analyze the qPCR data by sophisticated 
+analysis pipelines. 
+
+There is a number of open source processing solutions for qPCR, dPCR and 
+melting curve analysis written in \textbf{R} \cite{pabinger_2014, 
+ritz_qpcr_2008, roediger_RJ_2013, roediger2015chippcr}. Although the R 
+environment extended by dedicated packages provides wide array of appropriate 
+tools, it still cannot directly read RDML files. The \textit{RDML} package 
+closes this gap and imports RDML data straight to \textbf{R} environment.
+
 	\textbf{R} provides a comprehensive set of tools for reproducible 
-	research preserving objects created during the analysis 
-	\cite{roediger2015r,roediger2015chippcr}. The common approaches for data 
-	management in \textbf{R} are native formats such as and \textbf{R} 
-	workspaces or objects \cite{roediger_rkward_2012}. However, the external 
-	applications of these methods is limited regarding the RDML format, a 
-	specifically tailored variant of XML. The principle of reproducible research is 
-	not retained without a standard method of data import as the \textit{RDML} 
-	package. Our software enables usage of the PCR-related R tools as recently 
-	reviewed in \cite{pabinger_2014}, while working on the RDML data derived 
-	straight from the PCR system. Concluding, the \textit{RDML} package may serve as 
-	foundation for other \textbf{R} package hosted at Bioconductor 
-	\cite{gentleman_2004} and CRAN as it was shown recently in \cite{roediger2015r}.
-	
-	In this article we describe the \textbf{R} package \textit{RDML}, which allows to
-	import and export RDML files (~v.~1.1 or later) and transform it to the
-	human readable format. \textit{RDML} package is open-source, free to use,
-	platform-independent, and thus can be modified for specific tasks or other
-	\textbf{R} packages, or even integrated to work-flows with other programming
-	languages. Despite though many qPCR instruments and software solutions are able
-	work with the RDML format, there is a need make RDML available for the ever
-	increasing used \textbf{R} environment.
-	
-	\section{Implementation}
-	
-	The stable \textit{RDML} package is available at CRAN
-	(\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the
-	development version is hosted at GitHub (\url{https://github.com/kablag/RDML})
-	with facilities for bugs reports and request features. \textit{RDML}
-	provides \textbf{R6} classes, which corresponds to RDML~v.~1.2 format types.
-	\textbf{R} is a language with dynamic typing. This is helpful while scripting but
-	can lead to problematic debugging of more complicated workflows. \emph{R6} classes
-	provide type-safe interfaces to set data without access to inner structure of
-	objects thus all imputed data can be validated. This option is very useful when
-	creating packages to work as intermediate level for other packages (e.g., such
-	approach does not allow set \textbf{character} in place of \textbf{integer}
-	Supplementary Section S3). Furthermore, the inheritance of \textbf{R6} objects 
-	unifies the structure of the package and streamlines extending its capabilities 
-	(the whole package is written around a single base class).
-	
-	The main interaction is via the command line interface (CLI). However, 
-	we designed a graphical user interface based on the \textit{shiny} technology as described in \cite{roediger2015chippcr}.
-	
-	The RDML file format, coordinated by the RDML consortium 
-	(www.rdml.org/), is under continuous development. The \textit{RDML} package 
-	follows the changes and supports the current version RDML~v.~1.2. The future 
-	improvements of the RDML format will be also incorporated into the package.
-	
-	Central functions of the \textit{RDML} package encompass the read-in of RDML
-	data file and summary functions for RDML objects. The capabilities of packages range 
-	from advanced statistical analysis to simple yet crucial extraction of the fluorescence 
-	data. The public methods of the main class called RDML can be used to access and process 
-	the RDML data. These methods include: \begin{itemize} \item
-		\textbf{\$new()} -- creates new RDML object. Empty or from specified RDML file
-		(Supplementary Section S1); \item \textbf{\$AsDendrogram()} -- represents
-		structure of RDML object as dendrogram to observe it. (Supplementary Section
-		S1); \item \textbf{\$AsTable()} -- represents data contained in RDML object
-		(except fluorescent data) as \textit{data.frame} (Supplementary Section S4);
-		\item \textbf{\$GetFData()} -- gets fluorescent data (Supplementary Section S5);
-		\item \textbf{\$SetFData()} -- sets fluorescent data to RDML object
-		(Supplementary Section S6); \item \textbf{\$AsXML()} -- saves RDML object as
-		RDML~v.~1.2 file (Supplementary Section S7). \end{itemize}
-	
-	Beside working with existing RDML files, the package can create new RDML objects from
-	the data obtained from systems that do not support RDML format. To create eligible RDML 
-	object, one has to provide fluorescence data and minimal description of experiment
-	(Supplementary Section S10).
-	
-	A unique feature of our package is ability to merge several RDML files
-	(experiments) into one with \textbf{MergeRDMLs()} function and process them like
-	unit (Supplementary Section S7). For example, you can combine results of two
-	runs that have sample from one experiment or add calibration samples from one
-	run to another.
-	
-	We join the claim that data sets are an essential element of \textbf{R} 
-	packages for reproducible research \cite{roediger2015r}. As of \textit{RDML} 
-	v.~0.9-1 we provide data sets from the Bio-Rad CFX 96, Roche LightCycler 96 and 
-	Applied Biosystems StepOne.
-	
-	\section{Discussions and conclusions}
-	
-	The \textit{RDML} package for \textbf{R} imports and manipulates data from RDML~v.~1.1 and 
-	v.~1.2 format files. It can also create RDML~v.~1.2 files from data provided by an user. 
-	This package can be used as a part of the qPCR processing workflows or 
-	for preliminary summaries of experiments.
-		
-	\section{Acknowledgements}
-	Grateful thanks belong to the \textbf{R} community and the RDML consortium.
-	
-	\paragraph{Funding\textcolon} This work was funded by the Russian 
-	Ministry of Education and Science (project No. RFMEFI62114X0003), with usage of 
-	scientific equipment of Center for collective use ’Biotechnology’ at All-Russia 
-	Research Institute of Agricultural Biotechnology and the Federal Ministry of 
-	Education and Research (BMBF) InnoProfile--Transfer--Projekt 03 IPT 611X.
-	
-	
-	Conflict of Interest: none declared.
+research preserving objects created during the analysis 
+\cite{roediger2015r,roediger2015chippcr}. The common approaches for data 
+management in \textbf{R} are native formats such as and \textbf{R} workspaces or 
+objects \cite{roediger_rkward_2012}. However, the external applications of these 
+methods is limited regarding the RDML format, a specifically tailored variant of 
+XML. The principle of reproducible research is not retained without a standard 
+method of data import as the \textit{RDML} package. Our software enables usage 
+of the PCR-related R tools as recently reviewed in \cite{pabinger_2014}, while 
+working on the RDML data derived straight from the PCR system. Concluding, the 
+\textit{RDML} package may serve as foundation for other \textbf{R} package 
+hosted at Bioconductor \cite{gentleman_2004} and CRAN as it was shown recently 
+in \cite{roediger2015r}.
 
-	%\bibliographystyle{natbib}
-	%\bibliographystyle{achemnat}
-	%\bibliographystyle{plainnat}
-	%\bibliographystyle{abbrv}
-	%\bibliographystyle{bioinformatics}
-	%
-	\bibliographystyle{plain} %
-	\bibliography{RDML}
+In this article we describe the \textbf{R} package \textit{RDML}, which 
+allows to exchange RDML files (~v.~1.1 or later) and transform it to the human 
+readable format. Until version \textit{RDML} package 0.8-3, only RDML~v.~1.1 and 
+file import was supported. Here we present a considerably enhanced version of 
+the package. \textit{RDML} package is open-source, free to use, 
+platform-independent, and thus can be modified for specific tasks or other 
+\textbf{R} packages, or even integrated to work-flows with other programming 
+languages. Despite though many qPCR instruments and software solutions are able 
+work with the RDML format, there is a need make RDML available for the ever 
+increasing used \textbf{R} environment.
+
+\section{Implementation}
+	
+	The stable \textit{RDML} package is available at CRAN 
+(\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
+development version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
+with facilities for bugs reports and request features. \textit{RDML} provides 
+\textbf{R6} classes, which corresponds to RDML~v.~1.2 format types. \textbf{R} 
+is a language with dynamic typing. This is helpful while scripting but can lead 
+to problematic debugging of more complicated workflows. \emph{R6} classes 
+provide type-safe interfaces to set data without access to inner structure of 
+objects thus all imputed data can be validated. This option is very useful when 
+creating packages to work as intermediate level for other packages (e.g., such 
+approach does not allow set \textbf{character} in place of \textbf{integer} 
+Supplementary Section S3). Furthermore, the inheritance of \textbf{R6} objects 
+unifies the structure of the package and streamlines extending its capabilities 
+(the whole package is written around a single base class). The main interaction 
+is via the command line interface (CLI). However, we designed a graphical user 
+interface based on the \textit{shiny} technology as described in 
+\cite{roediger2015chippcr}. The RDML file format, coordinated by the RDML 
+consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
+package follows the changes and supports the current version RDML~v.~1.2. 
+Central functionality of the \textit{RDML} package encompass the read-in of RDML 
+data file and summary generation for RDML objects. The capabilities of packages 
+range from advanced statistical analysis to simple yet crucial extraction of the 
+fluorescence data. The public methods of the main class called RDML can be used 
+to access and process the RDML data. These methods include:
+
+\begin{itemize} 
+  \item \textbf{\$new()} -- creates new RDML object. Empty or from specified RDML 
+  file (Supplementary Section S1); \item \textbf{\$AsDendrogram()} -- represents 
+  structure of RDML object as dendrogram to observe it. (Supplementary Section 
+  S1);
+  \item \textbf{\$AsTable()} -- represents data contained in RDML object (except 
+  fluorescent data) as \textit{data.frame} (Supplementary Section S4);
+  \item \textbf{\$GetFData()} -- gets fluorescent data (Supplementary Section S5);
+  \item \textbf{\$SetFData()} -- sets fluorescent data to RDML object (Supplementary Section S6); 
+  \item \textbf{\$AsXML()} -- saves RDML object as RDML~v.~1.2 file (Supplementary Section S7).
+\end{itemize}
+	
+	Beside working with existing RDML files, the package can create new RDML 
+objects from the data obtained from systems that do not support RDML format. To 
+create eligible RDML object, one has to provide fluorescence data and minimal 
+description of experiment (Supplementary Section S10). A unique feature of our 
+package is ability to merge several RDML files (experiments) into one with 
+\textbf{MergeRDMLs()} function and process them like unit (Supplementary Section 
+S7). For example, you can combine results of two runs that have sample from one 
+experiment or add calibration samples from one run to another.
+
+Data sets are an essential element of \textbf{R} packages for reproducible 
+research \cite{roediger2015r}. As of \textit{RDML} v.~0.9-1 we provide data sets 
+from the Bio-Rad CFX 96, Roche LightCycler 96 and Applied Biosystems StepOne.
+
+\section{Discussions and conclusions}
+	
+	The \textit{RDML} package for \textbf{R} imports and manipulates data 
+from RDML~v.~1.1 and v.~1.2 format files. It can also create RDML~v.~1.2 files 
+from data provided by an user. This package can be used as a part of the qPCR 
+processing workflows or for preliminary summaries of experiments. Due to the 
+openness of the format, we anticipate that other scientific disciplines might 
+benefit from this implementation.
+
+Researcher are faced to work with many data sets and collect data no 
+longer in a single laboratory. Adaptable data management - aka. adaptive 
+informatics - is relevant in cases where data from omics approaches and 
+different assays (e.g., flow cytometry, digital PCR, NGS) need to be merged 
+\cite{baker_quantitative_2012}. Due to the fact that RDML is based on XML it is 
+possible to converge the file with other formats such as HDF 
+\cite{millard_adaptive_2011}. Bioconductor has an active HDF5 project, which 
+offers and HDF5 interface for R \cite{Fischer_HDF5}.
+
+\section{Acknowledgements}
+Grateful thanks belong to the \textbf{R} community and the RDML consortium.
+	
+\paragraph{Funding\textcolon} This work was funded by the Russian 
+Ministry of Education and Science (project No. RFMEFI62114X0003), with 
+usage of scientific equipment of Center for collective use ’Biotechnology’ at 
+All-Russia Research Institute of Agricultural Biotechnology and the Federal 
+Ministry of Education and Research (BMBF) InnoProfile--Transfer--Projekt 03 IPT 
+611X.
+	
+	
+Conflict of Interest: none declared.
+
+%\bibliographystyle{natbib}
+%\bibliographystyle{achemnat}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abbrv}
+%\bibliographystyle{bioinformatics}
+%
+\bibliographystyle{plain} %
+\bibliography{RDML}
 	
 \end{document}
