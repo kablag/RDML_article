@@ -27,7 +27,7 @@ video.scan$experimenter <-
       idType$new("SR"),
       "Stefan",
       "Roediger",
-      "stefan.roediger@hs-lausitz.de"
+      "stefan.roediger@b-tu.de"
     ),
     experimenterType$new(
       idType$new("CD"),
