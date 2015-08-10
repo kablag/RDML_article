@@ -1,14 +1,47 @@
 library(RDML)
 library(chipPCR)
+library(plyr)
+library(ggplot2)
 data(C54)
+
+# Add method to RDML class for VideoScan data preprocessing and Cq calculation
+# Argument `last.cycle` - cycle limit
+# Argument `bg.range` - bg.range of CPP function
+RDML$set("public", "ProcessVideoScan",
+         function(last.cycle,
+                  bg.range) {
+           tab <- self$AsTable()
+           dat <- self$GetFData(tab)
+           # Give new names to runs
+           tab[, "run.id"] <- paste0(tab[, "run.id"], "_CPP")
+           sapply(2:length(dat), function(i) {
+             preprocessed <- CPP(dat[1:last.cycle[i - 1], 1], 
+                                 dat[1:last.cycle[i - 1], i],
+                                 trans = TRUE,
+                                 bg.range = bg.range[[i - 1]])[["y.norm"]]
+             dat_CPP <- cbind(dat[1:last.cycle[i - 1], 1],
+                              preprocessed)
+             colnames(dat_CPP)[2] <- rownames(tab)[i - 1]
+             # Set preprocessed data
+             self$SetFData(dat_CPP, tab)
+             # Set Cq for preprocessed data
+             cq <- diffQ2(dat_CPP, inder = TRUE)[["xTm1.2.D2"]][1]
+             video.scan$experiment[[tab[i - 1, "exp.id"]]]$
+               run[[tab[i - 1, "run.id"]]]$
+               react[[tab[i - 1, "react.id"]]]$
+               data[[tab[i - 1, "target"]]]$cq <- cq
+             
+           })
+         }, overwrite = TRUE
+)
 
 # Create a data frame of metadata
 descr <- data.frame(
   fdata.name = c("D1", "D2", "D3"),
   exp.id = c("exp1", "exp1", "exp1"),
   run.id = c("run1", "run2", "run3"),
-  react.id = c(1, 2, 3),
-  sample = c("Stock cDNA", "1/10 cDNA", "1/100 cDNA"),
+  react.id = c(1, 1, 1),
+  sample = c("D1 - Stock cDNA", "D2 - 1/10 cDNA", "D3 - 1/100 cDNA"),
   target = c("MLC-2v", "MLC-2v", "MLC-2v"),
   target.dyeId = c("Cy5", "Cy5", "Cy5"),
   stringsAsFactors = FALSE
@@ -56,12 +89,12 @@ cdna <-
       primingMethodType$new("oligo-dt"),
     dnaseTreatment = TRUE
   )
-video.scan$sample$`Stock cDNA`$description <- "Input stock cDNA was used undiluted (D1)"
-video.scan$sample$`Stock cDNA`$cdnaSynthesisMethod <- cdna
-video.scan$sample$`1/10 cDNA`$description <- "1/1000 diluted in A. bidest"
-video.scan$sample$`1/10 cDNA`$cdnaSynthesisMethod <- cdna
-video.scan$sample$`1/100 cDNA`$description <- "1/1000000 diluted in A. bidest"
-video.scan$sample$`1/100 cDNA`$cdnaSynthesisMethod <- cdna
+video.scan$sample$`D1 - Stock cDNA`$description <- "Input stock cDNA was used undiluted (D1)"
+video.scan$sample$`D1 - Stock cDNA`$cdnaSynthesisMethod <- cdna
+video.scan$sample$`D2 - 1/10 cDNA`$description <- "1/1000 diluted in A. bidest"
+video.scan$sample$`D2 - 1/10 cDNA`$cdnaSynthesisMethod <- cdna
+video.scan$sample$`D3 - 1/100 cDNA`$description <- "1/1000000 diluted in A. bidest"
+video.scan$sample$`D3 - 1/100 cDNA`$cdnaSynthesisMethod <- cdna
 
 video.scan$target$`MLC-2v`$xRef <- list(
   xRefType$new("uniprot",
@@ -137,6 +170,22 @@ video.scan$experiment$exp1$run$run1$thermalCyclingConditions <- idReferencesType
 video.scan$experiment$exp1$run$run2$thermalCyclingConditions <- idReferencesType$new("Amplification")
 video.scan$experiment$exp1$run$run3$thermalCyclingConditions <- idReferencesType$new("Amplification")
 
-#visualise RDML object
+# Process VideoScan data
+video.scan$ProcessVideoScan(c(35, 45, 55),
+                            list(c(1,8),
+                                 NULL,
+                                 NULL))
+# Visualise RDML object
 video.scan$AsDendrogram()
 
+# Visualise preprocessed data with Cq values as vertical dashed lines
+tab <- video.scan$AsTable(cq = ifelse(is.null(data$cq),
+                                      NA,
+                                      data$cq))
+dat <- video.scan$GetFData(tab[grepl("_CPP", tab[["run.id"]]), ],
+                           long.table = TRUE)
+ggplot(dat, aes(x = cyc, y = fluor)) +
+  geom_line(aes(group = fdata.name, color = fdata.name),
+            size = 1.2) +
+  geom_vline(aes(xintercept = cq, color = fdata.name),
+             linetype = "longdash")
