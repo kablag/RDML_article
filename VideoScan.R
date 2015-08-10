@@ -1,6 +1,5 @@
 library(RDML)
 library(chipPCR)
-library(plyr)
 library(ggplot2)
 data(C54)
 
