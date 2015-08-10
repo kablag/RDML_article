@@ -4,8 +4,8 @@ library(ggplot2)
 data(C54)
 
 # Add method to RDML class for VideoScan data preprocessing and Cq calculation
-# Argument `last.cycle` - cycle limit
-# Argument `bg.range` - bg.range of CPP function
+# Argument 'last.cycle' - cycle limit
+# Argument 'bg.range' - bg.range of CPP function
 RDML$set("public", "ProcessVideoScan",
          function(last.cycle,
                   bg.range) {
@@ -177,10 +177,12 @@ video.scan$ProcessVideoScan(c(35, 45, 55),
 # Visualise RDML object
 video.scan$AsDendrogram()
 
-# Visualise preprocessed data with Cq values as vertical dashed lines
+## Visualise preprocessed data with Cq values as vertical dashed lines
+# Add custom column that contains calculated Cq
 tab <- video.scan$AsTable(cq = ifelse(is.null(data$cq),
                                       NA,
                                       data$cq))
+# Get preprocessed data in 'long.table' format
 dat <- video.scan$GetFData(tab[grepl("_CPP", tab[["run.id"]]), ],
                            long.table = TRUE)
 ggplot(dat, aes(x = cyc, y = fluor)) +
