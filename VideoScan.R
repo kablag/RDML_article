@@ -1,5 +1,6 @@
 library(RDML)
 library(chipPCR)
+require(MBmca)
 library(ggplot2)
 data(C54)
 
@@ -189,4 +190,8 @@ ggplot(dat, aes(x = cyc, y = fluor)) +
   geom_line(aes(group = fdata.name, color = fdata.name),
             size = 1.2) +
   geom_vline(aes(xintercept = cq, color = fdata.name),
-             linetype = "longdash")
+             linetype = "longdash") +
+  scale_x_continuous("Cycle") +
+  scale_y_continuous("Fluorescence") +
+  ggtitle("Amplification of human MLC-2v\nVideoScan HCU")
+
