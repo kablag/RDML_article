@@ -72,7 +72,7 @@ video.scan$experimenter <-
 # Add a reference to documentation
 video.scan$documentation <- list(
   documentationType$new(
-    idType$new("Roediger et al. 201"),
+    idType$new("Roediger et al. 2013"),
     paste("A Highly Versatile Microscope Imaging Technology Platform for the Multiplex",
           "Real-Time Detection of Biomolecules and Autoimmune Antibodies. S. Roediger,",
           "P. Schierack, A. Boehm, J. Nitschke, I. Berger, U. Froemmel, C. Schmidt, M.",
