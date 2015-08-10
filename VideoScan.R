@@ -1,5 +1,6 @@
 library(RDML)
 library(chipPCR)
+library(MBmca)
 library(ggplot2)
 data(C54)
 
@@ -71,12 +72,12 @@ video.scan$experimenter <-
 # Add a reference to documentation
 video.scan$documentation <- list(
   documentationType$new(
-    idType$new("Roediger et al. 2013"),
+    idType$new("2013"),
     paste("A Highly Versatile Microscope Imaging Technology Platform for the Multiplex",
           "Real-Time Detection of Biomolecules and Autoimmune Antibodies. S. Roediger,",
           "P. Schierack, A. Boehm, J. Nitschke, I. Berger, U. Froemmel, C. Schmidt, M.",
           "Ruhland, I. Schimke, D. Roggenbuck, W. Lehmann and C. Schroeder. Advances in",
-          "Biochemical Bioengineering/Biotechnology. 133:33–74, 2013.",
+          "Biochemical Bioengineering/Biotechnology. 133:33-74, 2013.",
           "http://www.ncbi.nlm.nih.gov/pubmed/22437246")
   )
 )
