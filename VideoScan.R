@@ -72,7 +72,7 @@ video.scan$experimenter <-
 # Add a reference to documentation
 video.scan$documentation <- list(
   documentationType$new(
-    idType$new("2013"),
+    idType$new("Roediger et al. 201"),
     paste("A Highly Versatile Microscope Imaging Technology Platform for the Multiplex",
           "Real-Time Detection of Biomolecules and Autoimmune Antibodies. S. Roediger,",
           "P. Schierack, A. Boehm, J. Nitschke, I. Berger, U. Froemmel, C. Schmidt, M.",
@@ -190,4 +190,8 @@ ggplot(dat, aes(x = cyc, y = fluor)) +
   geom_line(aes(group = fdata.name, color = fdata.name),
             size = 1.2) +
   geom_vline(aes(xintercept = cq, color = fdata.name),
-             linetype = "longdash")
+             linetype = "longdash") +
+  scale_x_continuous("Cycle") +
+  scale_y_continuous("Fluorescence") +
+  ggtitle("Amplification of human MLC-2v\nVideoScan HCU")
+
