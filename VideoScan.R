@@ -50,7 +50,7 @@ descr <- data.frame(
 # Create the RDML object
 video.scan <- RDML$new()
 
-# Add metadata to the RDML object
+# Add fluorescence data and metadata to the RDML object
 video.scan$SetFData(C54, descr)
 
 # Add experimentator information
