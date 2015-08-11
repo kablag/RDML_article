@@ -35,7 +35,7 @@ RDML$set("public", "ProcessVideoScan",
          }, overwrite = TRUE
 )
 
-# Create a data frame of metadata
+# Create a data frame of metadata 
 descr <- data.frame(
   fdata.name = c("D1", "D2", "D3"),
   exp.id = c("exp1", "exp1", "exp1"),
