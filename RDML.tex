@@ -10,10 +10,14 @@
 \begin{document} \firstpage{1}
 	
 \title[RDML]{RDML: an \textbf{R} Package for Working with RDML Format Data}
-\author[Sample \textit{et~al}]{Corresponding Author\,$^{1,*}$, Co-Author\,$^{2}$ 
-	and Co-Author\,$^2$\footnote{to whom correspondence should be addressed}}
+\author[Blagodatskikh \textit{et~al}]{Konstantin Blagodatskikh\,$^{1}$\footnote{to whom correspondence should be addressed}, Micha\l{} Burdukiewicz\,$^{2}$, Stefan R\"{o}diger\,$^{3}$ 
+	and Andrej-Nikolai Spiess\,$^{4}$}
 
-\address{$^{1}$Department of XXXXXXX, Address XXXX etc.\\ $^{2}$Department of XXXXXXXX, Address XXXX etc.}
+\address{$^{1}$All-Russia Research Institute of Agricultural Biotechnology, Moscow, Russia\\ 
+	 $^{2}$Department of Genomics, Faculty of Biotechnology, University of Wroc\l{}aw, Wroc\l{}aw, Poland\\
+	 $^{3}$Faculty of Natural Sciences, Brandenburg University of Technology Cottbus--Senftenberg, Germany\\ 
+	 $^{4}$University Medical Center Hamburg-Eppendorf, Hamburg, Germany
+	 }
 	
 \history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
@@ -30,8 +34,8 @@ recommended element of the Minimum Information for Publication of Quantitative
 Real-Time PCR Experiments (MIQE) guidelines. Preserving the set-up and output of 
 experiments in well-defined scheme, RDML is a universal data storage systems. 
 Despite the fact that software products of qPCR instruments export RDML data, 
-there is no tools designed for manipulating RDML data in \textbf{R}, a 
-\textit{lingua franca} of bioinformatics.
+there is no tools designed for manipulating RDML data in sophisticated 
+environment for statistical bioinformatics.
 		
 \section{Results:} We developed the cross-platform open source \textit{RDML} 
 package for the  \textbf{R} statistical computing language. \textit{RDML} is 
@@ -114,30 +118,29 @@ serve as foundation for other \textbf{R} package hosted at Bioconductor
 \cite{gentleman_2004} and CRAN as it was shown recently in \cite{roediger2015r}.
 
 In this article we describe the \textbf{R} package \textit{RDML}, which 
-allows to exchange RDML files (~v.~1.1 or later) and transform it to the human 
+allows to exchange RDML files ($\geq$~v.~1.1) and transform it to the human 
 readable format. Until version \textit{RDML} package 0.8-3, only RDML~v.~1.1 and 
-file import was supported. Here we present a considerably enhanced version of 
+file import was supported. Here we present a considerably maturated version of 
 the package. \textit{RDML} package is open-source, free to use, 
 platform-independent, and thus can be modified for specific tasks or other 
 \textbf{R} packages, or even integrated to work-flows with other programming 
 languages. Despite though many qPCR instruments and software solutions are able 
-work with the RDML format, there is a need make RDML available for the ever 
-increasing used \textbf{R} environment.
+work with the RDML format, there is a need make RDML available for the increasingly used \textbf{R} environment.
 
 \section{Implementation}
 	
-	The stable \textit{RDML} package is available at CRAN 
+The \textit{RDML} package is available at CRAN 
 (\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
 development version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
 with facilities for bugs reports and request features. \textit{RDML} provides 
-\textbf{R6} classes, which corresponds to RDML~v.~1.2 format types. \textbf{R} 
+\emph{R6} classes, which corresponds to RDML~v.~1.2 format types. \textbf{R} 
 is a language with dynamic typing. This is helpful while scripting but can lead 
 to problematic debugging of more complicated workflows. \emph{R6} classes 
 provide type-safe interfaces to set data without access to inner structure of 
 objects thus all imputed data can be validated. This option is very useful when 
 creating packages to work as intermediate level for other packages (e.g., such 
-approach does not allow set \textbf{character} in place of \textbf{integer} 
-Supplementary Section S3). Furthermore, the inheritance of \textbf{R6} objects 
+approach does not allow set \emph{character} in place of \emph{integer} 
+Supplementary Section S3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines extending its capabilities 
 (the whole package is written around a single base class). The main interaction 
 is via the command line interface (CLI). However, we designed a graphical user 
@@ -199,13 +202,12 @@ Grateful thanks belong to the \textbf{R} community and the RDML consortium.
 	
 \paragraph{Funding\textcolon} This work was funded by the Russian 
 Ministry of Education and Science (project No. RFMEFI62114X0003), with 
-usage of scientific equipment of Center for collective use ’Biotechnology’ at 
+usage of scientific equipment of the Center for collective use ’Biotechnology’ at 
 All-Russia Research Institute of Agricultural Biotechnology and the Federal 
 Ministry of Education and Research (BMBF) InnoProfile--Transfer--Projekt 03 IPT 
 611X.
 	
-	
-Conflict of Interest: none declared.
+\paragraph{Conflict of Interest\textcolon} none declared.
 
 %\bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
@@ -213,7 +215,8 @@ Conflict of Interest: none declared.
 %\bibliographystyle{abbrv}
 %\bibliographystyle{bioinformatics}
 %
-\bibliographystyle{plain} %
+\bibliographystyle{plain}
+%
 \bibliography{RDML}
-	
+
 \end{document}
