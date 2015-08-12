@@ -13,6 +13,11 @@ RDML$set("public", "ProcessVideoScan",
            tab <- self$AsTable()
            dat <- self$GetFData(tab)
            # Give new names to runs
+           # Preprocess amplification curve raw data as described in 
+           # Rödiger et al. (2015) Bioinformatics. Note that the dataset
+           # has different length of cycle numbers and missing values (NAs).
+           # The CPP function from the chipPCR package prepares the data for 
+           # further analysis.
            tab[, "run.id"] <- paste0(tab[, "run.id"], "_CPP")
            sapply(2:length(dat), function(i) {
              preprocessed <- CPP(dat[1:last.cycle[i - 1], 1], 
@@ -24,7 +29,11 @@ RDML$set("public", "ProcessVideoScan",
              colnames(dat_CPP)[2] <- rownames(tab)[i - 1]
              # Set preprocessed data
              self$SetFData(dat_CPP, tab)
-             # Set Cq for preprocessed data
+             # Set Cq from second derivative maximum method as described in 
+             # Rödiger et al. (2015) Bioinformatics for preprocessed data.
+             # The diffQ2 function from the MBmca package 
+             # (Rödiger et al. (2013), The R Journal) was used to calculate the
+             # Cq values of each amplificaion curve.
              cq <- diffQ2(dat_CPP, inder = TRUE)[["xTm1.2.D2"]][1]
              video.scan$experiment[[tab[i - 1, "exp.id"]]]$
                run[[tab[i - 1, "run.id"]]]$
@@ -47,10 +56,11 @@ descr <- data.frame(
   stringsAsFactors = FALSE
 )
 
-# Create the RDML object
+# Create an empty RDML object
 video.scan <- RDML$new()
 
-# Add fluorescence data and metadata to the RDML object
+# Add fluorescence data and metadata to the RDML object from a given source
+# Fare the sake of easyness we use the C54 dataset from the chipPCR package.
 video.scan$SetFData(C54, descr)
 
 # Add experimentator information
