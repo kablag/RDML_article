@@ -135,7 +135,12 @@ The \textit{RDML} package is available at CRAN
 (\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
 development version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
 with facilities for bugs reports and request features. \textit{RDML} provides 
-\emph{R6} classes, which corresponds to RDML~v.~1.2 format types. \textbf{R} 
+\emph{R6} classes, which corresponds to RDML~v.~1.2 input format types. 
+
+
+chaining function \emph{R6}
+
+\textbf{R} 
 is a language with dynamic typing. This is helpful while scripting but can lead 
 to problematic debugging of more complicated workflows. \emph{R6} classes 
 provide type-safe interfaces to set data without access to inner structure of 
@@ -145,7 +150,7 @@ approach does not allow set \emph{character} in place of \emph{integer}
 Supplementary Section S3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines extending its capabilities 
 (the whole package is written around a single base class). The main interaction 
-is via the command line interface (CLI). However, we designed a graphical user 
+is via the command line interface (CLI). This enables batch processing. However, we designed a graphical user 
 interface based on the \textit{shiny} technology as described in 
 \cite{roediger2015chippcr}. The RDML file format, coordinated by the RDML 
 consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
