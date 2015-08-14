@@ -156,9 +156,15 @@ do_rdml <- function(n_exps, exp_data) {
 }
 
 benchmark <- microbenchmark(do_rdml(1, reps384), 
-                            do_rdml(10, reps384),
+                            do_rdml(8, reps384),
                             do_rdml(20, reps384), 
-                            do_rdml(30, reps384), 
-                            do_rdml(50, reps384), 
-                            do_rdml(100, reps384), times = 100)
+                            do_rdml(30, reps384),
+                            do_rdml(32, reps384),
+                            do_rdml(50, reps384),
+                            do_rdml(96, reps384),
+                            do_rdml(100, reps384),
+                            do_rdml(300, reps384),
+                            do_rdml(384, reps384),
+                            do_rdml(765, reps384),
+                            do_rdml(1000, reps384), times = 100)
 
