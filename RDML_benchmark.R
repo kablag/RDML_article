@@ -30,7 +30,7 @@ do_rdml <- function(n_exps, exp_data) {
   # Fare the sake of easyness we use the C54 dataset from the chipPCR package.
   dat <- cbind(exp_data[, 1], exp_data[, sample(2L:ncol(exp_data), n_exps, replace = TRUE)])
   colnames(dat) <- c("cyc", paste0("D", 1L:n_exps))
-
+  
   video.scan$SetFData(dat, descr)
   
   # Add experimentator information
@@ -155,25 +155,30 @@ do_rdml <- function(n_exps, exp_data) {
   video.scan
 }
 
-benchmark <- microbenchmark(do_rdml(1, reps384), 
-                            do_rdml(8, reps384),
-                            do_rdml(20, reps384), 
-                            do_rdml(30, reps384),
-                            do_rdml(32, reps384),
-                            do_rdml(50, reps384),
-                            do_rdml(96, reps384),
-                            do_rdml(100, reps384),
-                            do_rdml(300, reps384),
-                            do_rdml(384, reps384),
-                            do_rdml(765, reps384),
-                            do_rdml(1000, reps384), 
-                            times = 100)
-load("benchmark_win.RData")
+# benchmark <- microbenchmark(do_rdml(1, reps384), 
+#                             do_rdml(8, reps384),
+#                             do_rdml(20, reps384), 
+#                             do_rdml(30, reps384),
+#                             do_rdml(32, reps384),
+#                             do_rdml(50, reps384),
+#                             do_rdml(96, reps384),
+#                             do_rdml(100, reps384),
+#                             do_rdml(300, reps384),
+#                             do_rdml(384, reps384),
+#                             do_rdml(765, reps384),
+#                             do_rdml(1000, reps384), 
+#                             times = 100)
+load("benchmarks.RData")
+
+
 swin <- summary(benchmark_win, unit = "s")
+slin <- summary(benchmark_linux, unit = "s")
 #number of reactions
 nr <- as.vector(na.omit(as.numeric(unlist(strsplit(unlist(strsplit(levels(swin[["expr"]]), "(", fixed = TRUE)), ",")))))
-bench_df <- data.frame(nr = nr, swin[, c("min", "lq", "mean", "median", "uq", "max")], 
-                       os = rep("Windows", length(nr)))
+bench_df <- rbind(data.frame(nr = nr, swin[, c("min", "lq", "mean", "median", "uq", "max")], 
+                             os = rep("Windows", length(nr))),
+                  data.frame(nr = nr, slin[, c("min", "lq", "mean", "median", "uq", "max")], 
+                             os = rep("Unix", length(nr))))
 
 ggplot(bench_df, aes(x = nr, y = mean, colour = os)) +
   geom_point(size = 3) +
