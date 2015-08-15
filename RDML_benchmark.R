@@ -173,9 +173,12 @@ swin <- summary(benchmark_win, unit = "s")
 #number of reactions
 nr <- as.vector(na.omit(as.numeric(unlist(strsplit(unlist(strsplit(levels(swin[["expr"]]), "(", fixed = TRUE)), ",")))))
 bench_df <- data.frame(nr = nr, swin[, c("min", "lq", "mean", "median", "uq", "max")], 
-                       os = rep("windows", length(nr)))
+                       os = rep("Windows", length(nr)))
 
 ggplot(bench_df, aes(x = nr, y = mean, colour = os)) +
-  geom_point() +
+  geom_point(size = 3) +
   scale_x_continuous("Number of experiments") +
-  scale_y_continuous("Time [s]")
+  scale_y_continuous("Time [s]") +
+  scale_color_discrete("Operating\nsystem") +
+  #stat_smooth(method = "lm", se = FALSE) + #not really linear
+  stat_smooth(method = "loess")
