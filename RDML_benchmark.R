@@ -6,6 +6,8 @@ library(qpcR)
 data(C54)
 library(microbenchmark)
 
+
+#benchmark example, assumed only one pcr reaction per run
 do_rdml <- function(n_exps, exp_data) {
   # Add method to RDML class for VideoScan data preprocessing and Cq calculation
   # Argument 'last.cycle' - cycle limit
@@ -150,7 +152,7 @@ do_rdml <- function(n_exps, exp_data) {
           "measure points and D2 contains a missing value at cycle 37.")
   
   for(i in 1L:n_exps)
-    video.scan$experiment$exp1$run[[paste0("run", i)]]$thermalCyclingConditions
+    video.scan$experiment$exp1$run[[paste0("run", i)]]$thermalCyclingConditions <- idReferencesType$new("Amplification")
   
   video.scan
 }
