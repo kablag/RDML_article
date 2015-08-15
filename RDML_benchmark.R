@@ -166,5 +166,16 @@ benchmark <- microbenchmark(do_rdml(1, reps384),
                             do_rdml(300, reps384),
                             do_rdml(384, reps384),
                             do_rdml(765, reps384),
-                            do_rdml(1000, reps384), times = 100)
+                            do_rdml(1000, reps384), 
+                            times = 100)
+load("benchmark_win.RData")
+swin <- summary(benchmark_win, unit = "s")
+#number of reactions
+nr <- as.vector(na.omit(as.numeric(unlist(strsplit(unlist(strsplit(levels(swin[["expr"]]), "(", fixed = TRUE)), ",")))))
+bench_df <- data.frame(nr = nr, swin[, c("min", "lq", "mean", "median", "uq", "max")], 
+                       os = rep("windows", length(nr)))
 
+ggplot(bench_df, aes(x = nr, y = mean, colour = os)) +
+  geom_point() +
+  scale_x_continuous("Number of experiments") +
+  scale_y_continuous("Time [s]")
