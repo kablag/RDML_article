@@ -182,6 +182,8 @@ bench_df <- rbind(data.frame(nr = nr, swin[, c("min", "lq", "mean", "median", "u
                   data.frame(nr = nr, slin[, c("min", "lq", "mean", "median", "uq", "max")], 
                              os = rep("Unix", length(nr))))
 
+#write.csv(bench_df, file = "bench_df.csv", row.names = FALSE)
+
 ggplot(bench_df, aes(x = nr, y = mean, colour = os)) +
   geom_point(size = 3) +
   scale_x_continuous("Number of experiments") +
