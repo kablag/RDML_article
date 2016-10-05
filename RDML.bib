@@ -359,14 +359,18 @@ Our comprehensive survey showed that most tools use their own file format and on
   Volume                   = {7}
 }
 
-@Article{roediger2015chippcr,
-  Title                    = {{chipPCR: an R package to pre-process raw data of amplification curves}},
-  Author                   = {R{\"o}diger, Stefan and Burdukiewicz, Micha{\l} and Schierack, Peter},
-  Journal                  = {Bioinformatics},
-  Year                     = {2015},
-  Pages                    = {btv205},
-
-  Publisher                = {Oxford Univ Press}
+@article{roediger2015chippcr,
+author = {R{\"o}diger, Stefan and Burdukiewicz, Micha{\l} and Schierack, Peter}, 
+title = {{chipPCR: an R package to pre-process raw data of amplification curves}},
+volume = {31}, 
+number = {17}, 
+pages = {2900-2902}, 
+year = {2015}, 
+doi = {10.1093/bioinformatics/btv205}, 
+abstract ={Motivation: Both the quantitative real-time polymerase chain reaction (qPCR) and quantitative isothermal amplification (qIA) are standard methods for nucleic acid quantification. Numerous real-time read-out technologies have been developed. Despite the continuous interest in amplification-based techniques, there are only few tools for pre-processing of amplification data. However, a transparent tool for precise control of raw data is indispensable in several scenarios, for example, during the development of new instruments.Results: chipPCR is an R package for the pre-processing and quality analysis of raw data of amplification curves. The package takes advantage of R’s S4 object model and offers an extensible environment. chipPCR contains tools for raw data exploration: normalization, baselining, imputation of missing values, a powerful wrapper for amplification curve smoothing and a function to detect the start and end of an amplification curve. The capabilities of the software are enhanced by the implementation of algorithms unavailable in R, such as a 5-point stencil for derivative interpolation. Simulation tools, statistical tests, plots for data quality management, amplification efficiency/quantification cycle calculation, and datasets from qPCR and qIA experiments are part of the package. Core functionalities are integrated in GUIs (web-based and standalone shiny applications), thus streamlining analysis and report generation.Availability and implementation: http://cran.r-project.org/web/packages/chipPCR. Source code: https://github.com/michbur/chipPCR.Contact: stefan.roediger@b-tu.deSupplementary information: Supplementary data are available at Bioinformatics online.}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/31/17/2900.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/31/17/2900.full.pdf+html}, 
+journal = {Bioinformatics} 
 }
 
 @Article{roediger_rkward_2012,
@@ -719,4 +723,52 @@ Conclusions: The selection of a smoothing algorithm is an important step in deve
     url = {https://web.archive.org/web/20140823221902/http://www.r-bloggers.com/inaccurate-results-from-microbenchmark/},
   }
 
-
+  @article{bustin_reproducibility_2014,
+    title = {The reproducibility of biomedical research: {Sleepers} awake!},
+    volume = {2},
+    issn = {2214-7535},
+    shorttitle = {The reproducibility of biomedical research},
+    url = {http://www.sciencedirect.com/science/article/pii/S2214753515000030},
+    doi = {10.1016/j.bdq.2015.01.002},
+    abstract = {There is increasing concern about the reliability of biomedical research, with recent articles suggesting that up to 85\% of research funding is wasted. This article argues that an important reason for this is the inappropriate use of molecular techniques, particularly in the field of RNA biomarkers, coupled with a tendency to exaggerate the importance of research findings.},
+    urldate = {2016-10-05},
+    journal = {Biomolecular Detection and Quantification},
+    author = {Bustin, Stephen A.},
+    month = dec,
+    year = {2014},
+    keywords = {Biomedicine, Cancer, Microarrays, Next generation sequencing, qPCR, Reproducibility},
+    pages = {35--42}
+  }
+  
+  
+  @article{liu_r_2014,
+    title = {An {R} package that automatically collects and archives details for reproducible computing},
+    volume = {15},
+    copyright = {2014 Liu and Pounds; licensee BioMed Central Ltd.},
+    issn = {1471-2105},
+    url = {http://www.biomedcentral.com/1471-2105/15/138/abstract},
+    doi = {10.1186/1471-2105-15-138},
+    abstract = {It is scientifically and ethically imperative that the results of statistical analysis of biomedical research data be computationally reproducible in the sense that the reported results can be easily recapitulated from the study data. Some statistical analyses are computationally a function of many data files, program files, and other details that are updated or corrected over time. In many applications, it is infeasible to manually maintain an accurate and complete record of all these details about a particular analysis.
+      PMID: 24886202},
+    language = {en},
+    number = {1},
+    urldate = {2014-07-01},
+    journal = {BMC Bioinformatics},
+    author = {Liu, Zhifa and Pounds, Stan},
+    month = may,
+    year = {2014},
+    pmid = {24886202},
+    pages = {138}
+  }
+  
+  @article{leeper_archiving_2014,
+    title = {Archiving {Reproducible} {Research} with {R} and {Dataverse}},
+    volume = {6},
+    url = {http://journal.r-project.org/archive/2014-1/leeper.pdf},
+    number = {1},
+    journal = {The R Journal},
+    author = {Leeper, Thomas J.},
+    month = jun,
+    year = {2014},
+    pages = {151--158}
+  }

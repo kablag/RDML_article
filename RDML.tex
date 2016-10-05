@@ -15,7 +15,7 @@
 
 \address{$^{1}$All-Russia Research Institute of Agricultural Biotechnology, Moscow, Russia\\ 
 	 $^{2}$Department of Genomics, Faculty of Biotechnology, University of Wroc\l{}aw, Wroc\l{}aw, Poland\\
-	 $^{3}$Faculty of Natural Sciences, Brandenburg University of Technology Cottbus--Senftenberg, Germany\\ 
+	 $^{3}$Institute of Biotechnology, Brandenburg University of Technology Cottbus--Senftenberg, Germany\\ 
 	 $^{4}$University Medical Center Hamburg-Eppendorf, Hamburg, Germany
 	 }
 	
@@ -33,7 +33,7 @@ the set-up and output of experiments in well-defined scheme. The Real-time PCR
 Data Markup Language (RDML) is a recommended standard of the Minimum Information 
 for Publication of Quantitative Real-Time PCR Experiments (MIQE) guidelines. 
 Despite the fact that software products of qPCR instruments export RDML data, 
-there is no tools designed for manipulating RDML data in sophisticated 
+there is no tool designed for working with RDML data in sophisticated 
 environment for statistical bioinformatics.
 		
 \section{Results:} We developed the cross-platform open source \textit{RDML} 
@@ -43,7 +43,7 @@ data; (ii) to extracts sample information (e.g., targets, concentration); (iii)
 to transform data to various formats of the \textbf{R} environment; (iv) to 
 generate human readable experiment summaries; and (v) to create RDML files from 
 user data. In addition, offers \textit{RDML} a graphical user interface for 
-selected functions. We show that \textit{RDML} enables a seamless analysis with 
+selected functions such as . We show that \textit{RDML} enables a seamless analysis with 
 with other \textbf{R} packages.
 
 \section{Availability:} url{https://cran.r-project.org/web/packages/RDML}. Source code: 
@@ -52,7 +52,7 @@ url{https://github.com/kablag/RDML}. \section{Contact:}
 
 
 \section{Introduction}
-  Real-time quantitative PCR (qPCR) is among the most used methods in molecular 
+  Real-time quantitative PCR (qPCR) is one of the most used methods in molecular 
 biology, diagnostics, food industry and other areas. qPCR is well accepted since 
 it is simple, accurate, reliable and reproducible \cite{pabinger_2014}. The 
 Minimum Information for Publication of Quantitative Real-Time PCR Experiments
@@ -68,44 +68,46 @@ lock-in. Therefore, the diversification comes at a cost at the level of data
 exchange. Discrepancies in data processing hinder comparison of the PCR results 
 obtained on different systems. Disparate storage formats prohibit the processing 
 of raw data from one instrument in the another system. Data processing is a 
-central challenge in qPCR data analysis \cite{roediger2015r, 
+central challenge in qPCR data analysis \cite{bustin_reproducibility_2014, roediger2015r, 
 spiess_impact_2014}.
 
 The MIQE guidelines suggest the Real-time PCR Data Markup Language (RDML) as 
 qPCR interchange data format \cite{rdml-ninja_2015}. RDML is a vendor 
-independent and freely available file format, based on eXtensible Markup 
-Language (XML), which is commonly used in bioinformatics \cite{achard_xml_2001}, 
-to pass meta data and value between applications. Storage and exchange of qPCR 
-data is bidirectional. The RDML data standard contains the primary raw data 
-acquired by the machine, meta-information to understand the experimental setup 
-(e.g., sample annotation, qPCR protocol, probe and primer sequences) and 
-information to re-analyse the data \cite{lefever_rdml_2009}. The RDML format is 
-supported by different vendors (see Supplement) and third-party software (e.g., 
-\textit{Primer3Plus} \cite{untergasser_2007}, \textit{QPCR}, \textit{LinRegPCR}, 
-\textit{qBase+}) \cite{pabinger_2014, rdml-ninja_2015}. Despite the openness of 
-the RDML format, there is no open source software capable of reading and 
-processing this data. Users have to choose between programs from manufacturers 
-of PCR devices (which can use only their own generated files) or commercial 
-software such as \textit{qbase+} \cite{pabinger_2014, rdml-ninja_2015}. 
-Recently, Ruijter~\textit{et~al.} published the open-source desktop software 
+independent and freely available file format. The RDML format is based on 
+eXtensible Markup Language (XML), which is commonly used in bioinformatics 
+\cite{achard_xml_2001}, to pass meta data and value between applications. 
+Storage and exchange of qPCR data is bidirectional. The RDML data standard 
+contains the primary raw data acquired by the machine, meta-information to 
+understand the experimental setup (e.g., sample annotation, qPCR protocol, probe 
+and primer sequences) and information to re-analyse the data 
+\cite{lefever_rdml_2009}. The RDML format is supported by different vendors (see 
+Supplement) and third-party software (e.g., \textit{Primer3Plus} 
+\cite{untergasser_2007}, \textit{QPCR}, \textit{LinRegPCR}, \textit{qBase+}) 
+\cite{pabinger_2014, rdml-ninja_2015}. Despite the openness of the RDML format, 
+there was is no open source software capable of reading, processing and writing 
+this format. Users have to choose between programs from manufacturers of PCR 
+devices (which can use only their own generated files) or commercial software 
+such as \textit{qbase+} \cite{pabinger_2014, rdml-ninja_2015}. Recently, 
+Ruijter~\textit{et~al.} published the open-source desktop software 
 \textit{RDML-Ninja}, which can visualize, edit and validate RDML files 
 \cite{rdml-ninja_2015}. However, \textit{RDML-Ninja} cannot analyze the qPCR 
-data by sophisticated analysis pipelines. Additionally, there is a need for a 
-\textit{de novo} creation of RDML data.  It is especially of importance for 
-systems, that do not support the RDML format. 
-This includes commercial systems and experimental systems (e.g.,  point-of-care 
-devices). 
+data by sophisticated analysis pipelines. This limits its applications in 
+high-throughput applications. Moreover, there is a need for a \textit{de novo} 
+creation of RDML data.  It is especially of importance for systems, that do not 
+support the RDML format. This includes commercial systems and experimental 
+systems developed by indenpendent researchers (e.g.,  point-of-care devices). 
 
-The \textit{RDML} package for the statistical computing language \textbf{R} 
-closes this gap. \textbf{R} runs on virtually any platform and provides a 
-comprehensive set of tools for reproducible research preserving objects created 
-during the analysis \cite{roediger2015r,roediger2015chippcr}. This includes 
-standalone desktops or server structures \cite{roediger2015r}. There is a number 
-of open source processing solutions for qPCR, dPCR and melting curve analysis 
-written in \textbf{R} \cite{pabinger_2014, ritz_qpcr_2008, roediger_RJ_2013, 
-roediger2015chippcr}. Although the \textbf{R} environment extended by dedicated 
-packages provides wide array of tools, it was not possible to seamlessly process 
-RDML files.
+The statistical computing language \textbf{R} is a \textit{de facto} standard in applied 
+statistical bioinformatics with a broad spectrum of applications 
+\cite{gentleman_2004}. \textbf{R} runs on virtually any platform 
+and provides a comprehensive set of tools for reproducible research preserving 
+objects created during the analysis \cite{leeper_archiving_2014, liu_r_2014, roediger2015r,roediger2015chippcr}. 
+This includes standalone desktops or server structures \cite{roediger2015r}. 
+There is a number of open source processing solutions for qPCR, dPCR and melting 
+curve analysis written in \textbf{R} \cite{pabinger_2014, ritz_qpcr_2008, 
+roediger_RJ_2013, roediger2015chippcr}. Although the \textbf{R} environment 
+extended by dedicated packages provides wide array of tools, it was not possible 
+to seamlessly process RDML files.
 
 The common approaches for data management in \textbf{R} are native formats such 
 as and \textbf{R} workspaces or objects \cite{roediger_rkward_2012}. However, 
