@@ -13,7 +13,7 @@
 \author[Blagodatskikh \textit{et~al}]{Konstantin Blagodatskikh\,$^{1}$\footnote{to whom correspondence should be addressed}, Micha\l{} Burdukiewicz\,$^{2}$, Stefan R\"{o}diger\,$^{3}$ 
 	and Andrej-Nikolai Spiess\,$^{4}$}
 
-\address{$^{1}$All-Russia Research Institute of Agricultural Biotechnology, Moscow, Russia\\ 
+\address{$^{1}$Evrogen JSC, Moscow, Russia\\ 
 	 $^{2}$Department of Genomics, Faculty of Biotechnology, University of Wroc\l{}aw, Wroc\l{}aw, Poland\\
 	 $^{3}$Faculty of Natural Sciences, Brandenburg University of Technology Cottbus--Senftenberg, Germany\\ 
 	 $^{4}$University Medical Center Hamburg-Eppendorf, Hamburg, Germany
@@ -39,7 +39,7 @@ environment for statistical bioinformatics.
 		
 \section{Results:} We developed the cross-platform open source \textit{RDML} 
 package for the  \textbf{R} statistical computing language. \textit{RDML} is 
-compliment to RDML~$\geq$~v.~1.1 and provides functionality to (i) import RDML 
+compliment to RDML~$\geq$~v.~1.2 and provides functionality to (i) import RDML 
 data; (ii) to extracts sample information (e.g., targets, concentration); (iii) 
 to transform data to various formats of the \textbf{R} environment; (iv) to 
 generate human readable experiment summaries; and (v) to create RDML files from 
@@ -47,7 +47,7 @@ user data. In addition, offers \textit{RDML} a graphical user interface for
 selected functions. We show that \textit{RDML} enables a seamless analysis with 
 with other \textbf{R} packages.
 
-\section{Availability:} url{https://cran.r-project.org/web/packages/RDML}. Source code: 
+\section{Availability:} url{https://cran.r-project.org/package=RDML}. Source code: 
 url{https://github.com/kablag/RDML}. \section{Contact:} 
 \href{k.blag@yandex.ru}{k.blag@yandex.ru} \end{abstract}
 
@@ -133,7 +133,7 @@ used \textbf{R} environment.
 \section{Implementation}
 	
 The \textit{RDML} package is available at CRAN 
-(\url{http://cran.r-project.org/web/packages/RDML/index.html}) and the 
+(\url{https://cran.r-project.org/package=RDML}) and the 
 development version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
 with facilities for bugs reports and request features. \textit{RDML} provides 
 \emph{R6} classes, which corresponds to RDML~v.~1.2 format types. \textbf{R} 
@@ -159,7 +159,8 @@ to access and process the RDML data. These methods include:
 
 \begin{itemize} 
   \item \textbf{\$new()} -- creates new RDML object. Empty or from specified RDML 
-  file (Supplementary Section S1); \item \textbf{\$AsDendrogram()} -- represents 
+  file (Supplementary Section S1);
+  \item \textbf{\$AsDendrogram()} -- represents 
   structure of RDML object as dendrogram to observe it. (Supplementary Section 
   S1);
   \item \textbf{\$AsTable()} -- represents data contained in RDML object (except 
@@ -179,7 +180,7 @@ S7). For example, you can combine results of two runs that have sample from one
 experiment or add calibration samples from one run to another.
 
 Data sets are an essential element of \textbf{R} packages for reproducible 
-research \cite{roediger2015r}. As of \textit{RDML} v.~0.9-1 we provide data sets 
+research \cite{roediger2015r}. As of \textit{RDML} v.~0.9-5 we provide data sets 
 from the Bio-Rad CFX 96, Roche LightCycler 96 and Applied Biosystems StepOne.
 
 \section{Discussions and conclusions}
@@ -203,11 +204,6 @@ and analysis, but also the higher level of the experimental data management.
 
 \section{Acknowledgements}
 Grateful thanks belong to the \textbf{R} community and the RDML consortium.
-	
-\paragraph{Funding\textcolon} This work was funded by the Russian 
-Ministry of Education and Science (project No. RFMEFI57914X0012) and the Federal 
-Ministry of Education and Research (BMBF) InnoProfile--Transfer--Projekt 03 IPT 
-611X.
 	
 \paragraph{Conflict of Interest\textcolon} none declared.
 
