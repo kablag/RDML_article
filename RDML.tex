@@ -148,7 +148,7 @@ provide type-safe interfaces to set data without access to inner structure of
 objects thus all imputed data can be validated. This option is very useful when 
 creating packages to work as intermediate level for other packages (e.g., such 
 approach does not allow set \emph{character} in place of \emph{integer} 
-Supplementary Section S3). Furthermore, the inheritance of \emph{R6} objects 
+Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines extending its capabilities 
 (the whole package is written around a single base class). The main interaction 
 is via the command line interface (CLI). This enables batch processing. However, we designed a graphical user 
@@ -164,24 +164,24 @@ to access and process the RDML data. These methods include:
 
 \begin{itemize} 
   \item \textbf{\$new()} -- creates new RDML object. Empty or from specified RDML 
-  file (Supplementary Section S1);
+  file (Supplementary Section S3.1 and S3.10-3.13);
   \item \textbf{\$AsDendrogram()} -- represents 
   structure of RDML object as dendrogram to observe it. (Supplementary Section 
-  S1);
+  S3.1);
   \item \textbf{\$AsTable()} -- represents data contained in RDML object (except 
-  fluorescent data) as \textit{data.frame} (Supplementary Section S4);
-  \item \textbf{\$GetFData()} -- gets fluorescent data (Supplementary Section S5);
-  \item \textbf{\$SetFData()} -- sets fluorescent data to RDML object (Supplementary Section S6); 
-  \item \textbf{\$AsXML()} -- saves RDML object as RDML~v.~1.2 file (Supplementary Section S7).
+  fluorescent data) as \textit{data.frame} (Supplementary Section S3.4);
+  \item \textbf{\$GetFData()} -- gets fluorescent data (Supplementary Section S3.5);
+  \item \textbf{\$SetFData()} -- sets fluorescent data to RDML object (Supplementary Section S3.6); 
+  \item \textbf{\$AsXML()} -- saves RDML object as RDML~v.~1.2 file (Supplementary Section S3.8).
 \end{itemize}
 	
 	Beside working with existing RDML files, the package can create new RDML 
 objects from the data obtained from systems that do not support RDML format. To 
 create eligible RDML object, one has to provide fluorescence data and minimal 
-description of experiment (Supplementary Section S10). The another unique feature of our 
+description of experiment (Supplementary Section S3.10). The another unique feature of our 
 package is the ability to merge several RDML files (experiments) into one with 
 \textbf{MergeRDMLs()} function and process them like unit (Supplementary Section 
-S7). For example, you can combine results of two runs that have sample from one 
+S3.7). For example, you can combine results of two runs that have sample from one 
 experiment or add calibration samples from one run to another.
 
 Data sets are an essential element of \textbf{R} packages for reproducible 
