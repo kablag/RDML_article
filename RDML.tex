@@ -27,9 +27,9 @@
 
 \begin{abstract}
 		
-\section{Motivation:} Reproducible research is an essential element in science. 
-Part of this is are open document standards for data exchange, which preserve 
-the set-up and output of experiments in well-defined scheme. The Real-time PCR 
+\section{Motivation:} Reproducible research is essential in science. 
+Part of this is are open standards for data exchange, which preserve 
+the set-up and output of experiments in defined schemes. The Real-time PCR 
 Data Markup Language (RDML) is a recommended standard of the Minimum Information 
 for Publication of Quantitative Real-Time PCR Experiments (MIQE) guidelines. 
 Despite the fact that software products of qPCR instruments export RDML data, 
@@ -41,8 +41,7 @@ package for the statistical computing language \textbf{R}. \textit{RDML} is
 compliment to RDML~$\geq$~v.~1.2 and provides functionality to (i) import RDML data; (ii) to extracts sample information (e.g., targets, concentration); (iii) 
 to transform data to various formats of the \textbf{R} environment; (iv) to 
 generate human readable experiment summaries; and (v) to create RDML files from 
-user data. In addition, offers \textit{RDML} a graphical user interface for 
-selected functions such as . We show that \textit{RDML} enables a seamless analysis with 
+user data. In addition, offers \textit{RDML} a graphical user interface to read, edit and create RDML files. We show that \textit{RDML} enables a seamless analysis with 
 with other \textbf{R} packages.
 
 \section{Availability:} url{https://cran.r-project.org/package=RDML}. Source code: 
@@ -52,29 +51,29 @@ url{https://github.com/kablag/RDML}. \section{Contact:}
 
 \section{Introduction}
   Real-time quantitative PCR (qPCR) is one of the most used methods in molecular 
-biology, diagnostics, food industry and other areas. qPCR is well accepted since 
+biology, diagnostics and other areas. qPCR is well accepted since 
 it is simple, accurate, reliable and reproducible \cite{pabinger_2014}. The 
 Minimum Information for Publication of Quantitative Real-Time PCR Experiments
-were established to facilitate the comparison of experimental results from qPCR 
-and digital PCR (dPCR) \cite{huggett_2013}. There are at least twenty real-time 
+were established to facilitate the comparison of experimental results from qPCRs 
+\cite{huggett_2013}. There are at least twenty real-time 
 quantitative PCR cycler manufacturers. Such variety creates a broad selection to 
 address the specific market demands. The systems differ in details such as the 
 number of processable samples, the number of detection channels, the sample 
-arrangement (e.g., plate, carousel). In addition to this, the devices use different 
-data processing methods and incompatible data storage formats (e.g.,  binary formats). 
-The binary data format and system specific formats result in most cases a vendor 
+arrangement (e.g., plate, carousel). Moreover, the devices use different 
+data processing methods and non-interchangeable storage formats (e.g.,  binary formats). 
+Binary data formats and system specific formats result in most cases a vendor 
 lock-in. Therefore, the diversification comes at a cost at the level of data 
 exchange. Discrepancies in data processing hinder comparison of the PCR results 
 obtained on different systems. Disparate storage formats prohibit the processing 
 of raw data from one instrument in the another system. Data processing is a 
 central challenge in qPCR data analysis \cite{bustin_reproducibility_2014, roediger2015r, 
-spiess_impact_2014}.
+spiess_impact_2014, spiess_system-specific_2016}.
 
 The MIQE guidelines suggest the Real-time PCR Data Markup Language (RDML) as 
 qPCR interchange data format \cite{rdml-ninja_2015}. RDML is a vendor 
 independent and freely available file format. The RDML format is based on 
 eXtensible Markup Language (XML), which is commonly used in bioinformatics 
-\cite{achard_xml_2001}, to pass meta data and value between applications. 
+\cite{achard_xml_2001}, to pass meta data and values between applications. 
 Storage and exchange of qPCR data is bidirectional. The RDML data standard 
 contains the primary raw data acquired by the machine, meta-information to 
 understand the experimental setup (e.g., sample annotation, qPCR protocol, probe 
@@ -119,11 +118,11 @@ derived straight from the PCR system. Concluding, the \textit{RDML} package may
 serve as foundation for other \textbf{R} package hosted at Bioconductor 
 \cite{gentleman_2004} and CRAN as it was shown recently in \cite{roediger2015r}.
 
-In this article we describe the \textbf{R} package \textit{RDML}, which 
+Here we describe the \textit{RDML} package, which 
 allows to exchange RDML files ($\geq$~v.~1.1) and transform it to the human 
 readable format. Until version \textit{RDML} package 0.8-3, only RDML~v.~1.1 and 
 file import was supported. Here we present a considerably maturated version of 
-the package. \textit{RDML} package is open-source, free to use, 
+the package including a noval GUI to read, edit and create RDML files. \textit{RDML} package is open-source, free to use, 
 platform-independent, and thus can be modified for specific tasks or other 
 \textbf{R} packages, or even integrated to work-flows with other programming 
 languages. Despite many qPCR instruments and software solutions are able 
@@ -151,8 +150,8 @@ approach does not allow set \emph{character} in place of \emph{integer}
 Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines extending its capabilities 
 (the whole package is written around a single base class). The main interaction 
-is via the command line interface (CLI). This enables batch processing. However, we designed a graphical user 
-interface based on the \textit{shiny} technology as described in 
+is via the command line interface (CLI). This enables batch processing. However, we designed the graphical user
+interface \textbf{rdmlEdit} based on the \textit{shiny} technology as described in 
 \cite{roediger2015chippcr}. This GUI allows to edit RDML meta data and view fluorescence curve. The RDML file format, coordinated by the RDML 
 consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
 package follows the changes and supports the current version RDML~v.~1.2. 
