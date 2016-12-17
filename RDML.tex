@@ -138,7 +138,7 @@ Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects
 unifies the structure of the package and streamlines the extending of its capabilities 
 (since the whole package is written around a single base class). Although the main interaction 
 is via the command line interface (CLI) to enable batch processing,we designed  a graphical user
-interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology  \cite{roediger2015chippcr}. This GUI allows editing  of RDML meta data and  visualizing the raw, unprocessed fluorescence data
+interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology  \cite{shiny_2016}. This GUI allows editing  of RDML meta data and  visualizing the raw, unprocessed fluorescence data
 (Fig.~\ref{fig:02}). The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
 package  adheres to the changes and supports the current version RDML~v.~1.2. 
 Central functionalities of the \textit{RDML} package encompass the read-in of RDML  
@@ -176,9 +176,8 @@ experiment or add calibration samples to a run with genes-of-interest.
 \end{figure}
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figure_gui.pdf}
-% \includegraphics[width=0.5\textwidth]{adp.PNG}
 \caption{Working with RDML files in the \textbf{rdmlEdit} GUI. 
-	The function \textbf{rdmlEdit()} invokes a shiny GUI which allows to merge data, edit meta-data (e.g. (A) - Target) and view the raw 
+	The function \textbf{rdmlEdit()} invokes a shiny GUI which allows to merge data, edit meta-data (e.g., (A) - Target) and view the raw 
 	data of the amplification and melting curves (B). Both the plot and 
 	the table are interactive with highlighting and filter features.}\label{fig:02}
 \end{figure}
