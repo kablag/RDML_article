@@ -102,7 +102,7 @@ the external application of these  formats is limited with respect to the RDML f
 a specifically tailored variant of XML. Hence, the principle of reproducible research 
 is not warranted without a standard method of data import such as the \textit{RDML} 
 package. Our software enables  the application of  qPCR-related \textbf{R} tools, as 
-recently reviewed in \cite{pabinger_2014}, while working on  RDML data directy 
+recently reviewed in \cite{pabinger_2014}, while working on  RDML data directly 
 derived  from the qPCR system. To conclude, the \textit{RDML} package may 
 serve as a foundation for other \textbf{R} packages hosted at Bioconductor 
 \cite{gentleman_2004} and CRAN, as shown recently \cite{roediger2015r}.
@@ -132,16 +132,16 @@ is a language with dynamic typing. This is helpful while scripting, but can lead
 to problematic debugging of more complicated workflows. \emph{R6} classes 
 provide type-safe interfaces to set data without access to the inner structure of 
 objects so that all imported data can be validated. This option is  highly useful when 
-creating packages  at anintermediate level for other packages (e.g., such an
+creating packages  at an intermediate level for other packages (e.g., such an
 approach does not allow to set type \emph{character} in place of type \emph{integer}, 
 Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines the extending of its capabilities 
 (since the whole package is written around a single base class). Although the main interaction 
 is via the command line interface (CLI) to enable batch processing,we designed  a graphical user
-interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology  \cite{roediger2015chippcr}. This GUI allows editing  of RDML meta data and  visualizing the raw, unprocessedfluorescence data
+interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology  \cite{roediger2015chippcr}. This GUI allows editing  of RDML meta data and  visualizing the raw, unprocessed fluorescence data
 (Fig.~\ref{fig:02}). The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
 package  adheres to the changes and supports the current version RDML~v.~1.2. 
-Central functionalities of the \textit{RDML} package encompass the read-in of RDML 
+Central functionalities of the \textit{RDML} package encompass the read-in of RDML  
 data files and the summary generation for RDML objects. The public methods of the main  “RDML” class can be used 
 to access and process the internally stored RDML data. These methods include:
 
@@ -163,7 +163,7 @@ create an eligible RDML object, one has to provide fluorescence data and a minim
 description of the experiment (Supplementary Section S3.10). Another unique feature of our 
 package is the ability to merge several RDML files (experiments) into one single file with the 
 \textbf{MergeRDMLs()} function and process  it like a unit (Fig.~\ref{fig:01} and Supplementary Section 
-S3.7). For example,  one can combine the results of two runs withsamples of one 
+S3.7). For example,  one can combine the results of two runs with samples of one 
 experiment or add calibration samples to a run with genes-of-interest.
 
 
@@ -195,7 +195,7 @@ Researchers often collect gene expression data from more than one laboratory and
 informatics” - is relevant in cases where data from different omics approaches and  assays (e.g., flow cytometry, digital PCR, NGS) need to be merged 
 \cite{baker_quantitative_2012}.  As RDML is based on XML, it is 
 possible to converge the files with other formats such as HDF,
-\cite{millard_adaptive_2011} which is supported by \textbf{R} \cite{Fischer_HDF5}. This enablesextended data storage 
+\cite{millard_adaptive_2011} which is supported by \textbf{R} \cite{Fischer_HDF5}. This enables extended data storage 
 and analysis, but also a higher level of  experimental data management.
 
 \section{Acknowledgements}
