@@ -13,7 +13,7 @@
 
 \address{
 $^{1}$Institute of Biotechnology, Brandenburg University of Technology Cottbus--Senftenberg, Senftenberg, Germany\\ 
-$^{2}$Department of Genomics, Faculty of Biotechnology, University of Wroc\l{}aw, Wroc\l{}aw 
+$^{2}$Department of Genomics, Faculty of Biotechnology, University of Wroc\l{}aw, Wroc\l{}aw\\
 $^{3}$University Medical Center Hamburg-Eppendorf, Hamburg, Germany\\
 $^{4}$Evrogen JSC, Moscow, Russia\\ 
 }
@@ -68,18 +68,18 @@ The MIQE guidelines suggest Real-time PCR Data Markup Language (RDML) as the sta
 qPCR interchange data format \cite{rdml-ninja_2015}. RDML is a vendor 
 independent and freely available file format. It is based on the 
 eXtensible Markup Language (XML), which is commonly used in bioinformatics 
-\cite{achard_xml_2001} to pass meta data and values between applications. 
+\cite{achard_xml_2001} to pass metadata and values between applications. 
 Here, the storage and exchange of qPCR data is bidirectional. The RDML data standard 
 contains the primary raw data acquired by the qPCR system, meta-information to 
 understand the experimental setup (e.g., sample annotation, qPCR protocol, probe 
-and primer sequences) and sufficient information to re-analyse the data 
-\cite{lefever_rdml_2009}. The RDML format is supported by different vendors (see 
+and primer sequences) and information to re-analyse the data 
+\cite{lefever_rdml_2009}. Different vendors (see 
 Supplement) and third-party software (e.g., \textit{Primer3Plus} 
 \cite{untergasser_2007}, \textit{QPCR}, \textit{LinRegPCR}, \textit{qBase+}) 
-\cite{pabinger_2014, rdml-ninja_2015}. Despite its openness, 
+\cite{pabinger_2014, rdml-ninja_2015} support the RDML format. Despite its openness, 
 there exists no open source software capable of reading, processing and writing 
 this format. Instead, users have to choose between programs from manufacturers of qPCR 
-devices which can use only their own generated files, or alternatively commercial software 
+devices, which can use only their own generated files, or alternatively commercial software 
 such as \textit{qbase+} \cite{pabinger_2014, rdml-ninja_2015}. Recently, 
 Ruijter~\textit{et~al.} published the open-source desktop software 
 \textit{RDML-Ninja}, which can visualize, edit and validate RDML files 
@@ -123,7 +123,7 @@ used \textbf{R} environment.
 The \textit{RDML} package is available at CRAN 
 (\url{https://cran.r-project.org/package=RDML}) and the 
 development version is hosted at GitHub (\url{https://github.com/kablag/RDML}) 
-with facilities for bugs reports and request features. \textit{RDML} provides 
+with facilities for bugs reports and feature requests. \textit{RDML} provides 
 \emph{R6} classes, which corresponds to RDML~v.~1.2 input format types. 
 
 \textbf{R} 
@@ -132,12 +132,12 @@ to problematic debugging of more complicated workflows. \emph{R6} classes
 provide type-safe interfaces to set data without access to the inner structure of 
 objects so that all imported data can be validated. This option is highly useful when 
 creating packages at an intermediate level for other packages (e.g., such an
-approach does not allow to set type \emph{character} in place of type \emph{integer}, 
+approach does not permit set type \emph{character} in place of type \emph{integer}, 
 Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects 
 unifies the structure of the package and streamlines the extending of its capabilities 
 (since the whole package is written around a single base class). Although the main interaction 
 is via the command line interface (CLI) to enable batch processing,we designed a graphical user
-interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology \cite{shiny_2016}. This GUI allows editing of RDML meta data and visualizing the raw, unprocessed fluorescence data
+interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology \cite{shiny_2016}. This GUI allows editing of RDML metadata and visualizing the raw, unprocessed fluorescence data
 (Fig.~\ref{fig:02}). The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
 package adheres to the changes and supports the current version RDML~v.~1.2. 
 Central functionalities of the \textit{RDML} package encompass the read-in of RDML 
@@ -159,7 +159,7 @@ fluorescence data) as a \textit{data.frame} (Supplementary Section S3.4);
 In addition to working with existing RDML files, the package can create new RDML 
 objects from qPCR data of systems that do not support the RDML format. To 
 create an eligible RDML object, one has to provide fluorescence data and a minimal 
-description of the experiment (Supplementary Section S3.10). Another unique feature of our 
+description of the experiment (Supplementary Section S3.10). Another unique feature of the \textit{RDML} 
 package is the ability to merge several RDML files (experiments) into one single file with the 
 \textbf{MergeRDMLs()} function and process it like a unit (Fig.~\ref{fig:01} and Supplementary Section 
 S3.7). For example, one can combine the results of two runs with samples of one 
@@ -176,7 +176,7 @@ experiment or add calibration samples to a run with genes-of-interest.
 \includegraphics[width=0.5\textwidth]{figure_gui.pdf}
 \caption{Working with RDML files in the \textbf{rdmlEdit} GUI. 
   	(A) The function \textbf{rdmlEdit()} invokes a shiny GUI which allows to 
-	merge data, edit meta-data (e.g.,  - Target). (B) The GUI has tools to view the raw 
+	merge data, edit meta-data (e.g., - Target). (B) The GUI has tools to view the raw 
 	data of the amplification (tab ``qPCR'') and melting curves (tab ``Melting Curves''). Both the plot and 
 	the table are interactive with highlighting and filter features.}\label{fig:02}
 \end{figure}
@@ -186,11 +186,11 @@ experiment or add calibration samples to a run with genes-of-interest.
 In contrast to other RDML software provides the \textit{RDML} package basic 
 preprocessing and analysis capabilities including the Cq calculation based on 
 the second derivative maximum method and cycle threshold method based on 
-finding described in \cite{roediger_RJ_2013, roediger2015chippcr, 
+findings described in \cite{roediger_RJ_2013, roediger2015chippcr, 
 spiess_impact_2014, spiess_system-specific_2016}. The intention is to give the 
-user an verview of the data for quality control and and experiment planning. It 
+user an overview of the data for quality control and experiment planning. It 
 is recommended to the users of the \textit{RDML} package to evaluate their own 
-analysis pipeline based on evidance based principles as described elsewhere 
+analysis pipeline based on evidence based principles as described elsewhere 
 \cite{ritz_qpcr_2008, roediger2015r}. In particular, the cycle threshold method 
 is problematic \cite{spiess_impact_2014, spiess_system-specific_2016}. Other Cq 
 methods were challenged too \cite{ruijter_evaluation_2013}.
@@ -199,11 +199,11 @@ methods were challenged too \cite{ruijter_evaluation_2013}.
 
 The \textit{RDML} package for \textbf{R} imports and manipulates data 
 from RDML~v.~1.1 and v.~1.2 format files and can create RDML~v.~1.2 files 
-from data provided by a user. This package can be used as part of the qPCR 
+from user provided data. This package can be used as part of the qPCR 
 processing workflow or for preliminary summaries of experiments. Due to the 
 openness of the format, we anticipate that other scientific disciplines might 
 benefit from this implementation. Data processed with the \textit{RDML} package 
-can be subjeted to further statistical analysis with dedicated algorithems to 
+can be subjected to further statistical analysis with dedicated algorithms to 
 deal with non-detects \cite{mccall_non-detects_2014}, normalization 
 \cite{perkins_readqpcr_2012} and expression analysis \cite{dvinge_htqpcr:_2009, matz_no_2013}.
 
