@@ -1,5 +1,6 @@
 % !TeX spellcheck = en_US
 \documentclass{bioinfo}
+%\let\Tiny=\tiny
 
 \usepackage{hyperref} \usepackage{tikz} \usetikzlibrary{graphs}
 
@@ -21,7 +22,6 @@ $^{4}$Evrogen JSC, Moscow, Russia\\
 
 \editor{Associate Editor: XXXXXXX}
 \maketitle
-
 \begin{abstract}
 \section{Motivation:} Reproducible research is essential in science. 
 Part of this are open standards for data exchange, which preserve 
@@ -137,8 +137,7 @@ Supplementary Section S3.3). Furthermore, the inheritance of \emph{R6} objects
 unifies the structure of the package and streamlines the extending of its capabilities 
 (since the whole package is written around a single base class). Although the main interaction 
 is via the command line interface (CLI) to enable batch processing,we designed a graphical user
-interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology \cite{shiny_2016}. This GUI allows editing of RDML metadata and visualizing the raw, unprocessed fluorescence data
-(Fig.~\ref{fig:02}). The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
+interface (\textbf{rdmlEdit}) based on the \textit{shiny} technology \cite{shiny_2016}. This GUI allows editing of RDML metadata (Fig.~\ref{fig:metadata}), visualizing and analyzing the raw, unprocessed fluorescence data (Fig.~\ref{fig:curves}). The RDML file format, coordinated by the RDML consortium (www.rdml.org/), is under continuous development. The \textit{RDML} 
 package adheres to the changes and supports the current version RDML~v.~1.2. 
 Central functionalities of the \textit{RDML} package encompass the read-in of RDML 
 data files and the summary generation for RDML objects. The public methods of the main “RDML” class can be used 
@@ -148,7 +147,7 @@ to access and process the internally stored RDML data. These methods include:
 \item \textbf{\$new()} -- creates a new RDML object, empty or from a specified RDML 
 file (Supplementary Section S3.1 and S3.10-3.13);
 \item \textbf{\$AsDendrogram()} -- plots the
-structure of an RDML object as a dendrogram (Fig.~ \ref{fig:01} and Supplementary Section 
+structure of an RDML object as a dendrogram (Fig.~ \ref{fig:dendrogram} and Supplementary Section 
 S3.1);
 \item \textbf{\$AsTable()} -- represents the data contained in an RDML object (except 
 fluorescence data) as a \textit{data.frame} (Supplementary Section S3.4);
@@ -161,7 +160,7 @@ objects from qPCR data of systems that do not support the RDML format. To
 create an eligible RDML object, one has to provide fluorescence data and a minimal 
 description of the experiment (Supplementary Section S3.10). Another unique feature of the \textit{RDML} 
 package is the ability to merge several RDML files (experiments) into one single file with the 
-\textbf{MergeRDMLs()} function and process it like a unit (Fig.~\ref{fig:01} and Supplementary Section 
+\textbf{MergeRDMLs()} function and process it like a unit (Fig.~\ref{fig:dendrogram} and Supplementary Section 
 S3.7). For example, one can combine the results of two runs with samples of one 
 experiment or add calibration samples to a run with genes-of-interest.
 
@@ -170,15 +169,16 @@ experiment or add calibration samples to a run with genes-of-interest.
 \caption{Structure of an RDML object represented as a dendrogram via the 
 	\textbf{\$AsDendrogram()} function. Two files 
 	were loaded and merged into one object. As a result, two 
-	experiments can be processed in one pipeline.}\label{fig:01}
+	experiments can be processed in one pipeline.}\label{fig:dendrogram}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{figure_gui.pdf}
-\caption{Working with RDML files in the \textbf{rdmlEdit} GUI. 
-  	(A) The function \textbf{rdmlEdit()} invokes a shiny GUI which allows to 
-	merge data, edit meta-data (e.g., - Target). (B) The GUI has tools to view the raw 
-	data of the amplification (tab ``qPCR'') and melting curves (tab ``Melting Curves''). Both the plot and 
-	the table are interactive with highlighting and filter features.}\label{fig:02}
+	\includegraphics[width=0.5\textwidth]{figure_gui_metadata.pdf}
+	\caption{The function \textbf{rdmlEdit()} invokes a shiny GUI which allows to 
+		merge data, edit meta-data (e.g., - Target).}\label{fig:metadata}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figure_gui_curves.pdf}
+\caption{The GUI has tools to view and analyze the raw data of the amplification (tab ``qPCR'') and melting curves (tab ``Melting Curves''). (A) Amplification preprocess and Cq determination functions; (B) plot settings; (C) interactive amplification plot; (D) plate view with tubes selectors; (E) summary table with filtering options}\label{fig:curves}
 \end{figure}
 
 \section{Basic qPCR Analysis}
